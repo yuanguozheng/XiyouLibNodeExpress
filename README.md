@@ -74,3 +74,5 @@ using (Stream stream = res.GetResponseStream())
 ```
 
 失败则返回false和相关错误信息
+
+如有疑问可发邮件至：yuanguozheng@msn.cn
