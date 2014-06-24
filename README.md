@@ -13,12 +13,13 @@ API调用方式介绍：
 
 所有API使用POST方法提交，使用GET方法报错，JSON请求URL形式为：http://yourdomain/?api={具体的api名}，JSONP请求URL形式为：http://yourdomain/?api={具体的API名}&jsonp={回掉函数名}，格式错误则会提示NOT_FOUND错误。
 
-1.用户登录，API名：login
+1.用户登陆，API名：login
 
 必选参数：username,password
 
 示例代码（C#）：
 
+```csharp
 HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create("http://127.0.0.1/?api=login");
 
 using (Stream stream = req.GetRequestStream())
@@ -37,7 +38,7 @@ using (Stream stream = res.GetResponseStream())
     StreamReader reader = new StreamReader(stream);
     ResStr = reader.ReadToEnd();
 }
-
+```
 返回格式为JSON，形式如下：
 
 {
