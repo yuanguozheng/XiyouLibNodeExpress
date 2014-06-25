@@ -13,6 +13,7 @@
         "debug": "~0.7.4",
         "request": "*",
         "iconv-lite": "*",
-        "cheerio": "*"
+        "cheerio": "*",
+        "static-favicon": "~1.0.0"
     }
 }
