@@ -14,6 +14,9 @@ var callbackHeader;
 /* POST home page. */
 router.post('/', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
+    if (req.query.length == 0) {
+        apiError(res, 'PARAM_ERROR');
+    }
     var api = req.query.api;
     if (api == '' || api == null) {
         apiNotFound(res, 'API_NOT_FOUND');
