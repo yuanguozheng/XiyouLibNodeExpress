@@ -3,6 +3,7 @@ var router = express.Router();
 
 var userLogin = require('../functions/userLogin');
 var getHistoy = require('../functions/getHistory');
+var getRent = require('../functions/getRent');
 
 var uniResult = {
     Result: false,
@@ -53,6 +54,22 @@ router.post('/', function (req, res) {
             });
         }
             break;
+        case 'rent':
+        {
+            var loginSession = req.body.session;
+            getRent(loginSession, function (result) {
+                if (result == 'null') {
+                    apiReturn(res, 'NO_BOOKS');
+                }
+                else if (result == 'Server Error') {
+                    apiError(res, 'REMOTE_SERVER_ERROR');
+                }
+                else {
+                    apiReturn(res, result);
+                }
+            });
+        }
+            break;
         default:
             apiError(res, 'API_NOT_FOUND');
             break;
@@ -70,7 +87,7 @@ function apiReturn(res, content) {
     returnJSON(res);
 }
 
-function returnJSON(res){
+function returnJSON(res) {
     var returnStr;
     if (callbackHeader != '' && callbackHeader) {
         returnStr = callbackHeader + "(" + JSON.stringify(uniResult) + ")";
