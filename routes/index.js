@@ -4,6 +4,7 @@ var router = express.Router();
 var userLogin = require('../functions/userLogin');
 var getHistoy = require('../functions/getHistory');
 var getRent = require('../functions/getRent');
+var userInfo = require('../functions/userInfo');
 
 var uniResult = {
     Result: false,
@@ -42,15 +43,7 @@ router.post('/', function (req, res) {
         {
             var loginSession = req.body.session;
             getHistoy(loginSession, function (result) {
-                if (result == 'Not Login') {
-                    apiError(res, 'USER_NOT_LOGIN');
-                }
-                else if (result == 'Server Error') {
-                    apiError(res, 'REMOTE_SERVER_ERROR');
-                }
-                else {
-                    apiReturn(res, result);
-                }
+                resultProc(result, res);
             });
         }
             break;
@@ -58,15 +51,15 @@ router.post('/', function (req, res) {
         {
             var loginSession = req.body.session;
             getRent(loginSession, function (result) {
-                if (result == 'null') {
-                    apiReturn(res, 'NO_BOOKS');
-                }
-                else if (result == 'Server Error') {
-                    apiError(res, 'REMOTE_SERVER_ERROR');
-                }
-                else {
-                    apiReturn(res, result);
-                }
+                resultProc(result, res);
+            });
+        }
+            break;
+        case 'user':
+        {
+            var loginSession = req.body.session;
+            userInfo(loginSession, function (result) {
+                resultProc(result, res);
             });
         }
             break;
@@ -75,6 +68,21 @@ router.post('/', function (req, res) {
             break;
     }
 });
+
+function resultProc(result, res) {
+    if (result == 'Not Login') {
+        apiError(res, 'USER_NOT_LOGIN');
+    }
+    else if (result == 'null') {
+        apiReturn(res, 'NO_RECORD');
+    }
+    else if (result == 'Server Error') {
+        apiError(res, 'REMOTE_SERVER_ERROR');
+    }
+    else {
+        apiReturn(res, result);
+    }
+}
 
 function apiError(res, err) {
     uniResult.Detail = err;
