@@ -88,7 +88,7 @@ using (Stream stream = res.GetResponseStream())
 }
 ```
 
-3. 用户借阅历史，API名：history
+3.用户借阅历史，API名：history
 
 完整路径：http://{hostname}:{port}/user/history
 
@@ -112,7 +112,7 @@ using (Stream stream = res.GetResponseStream())
 }
 ```
 
-4. 用户当前借阅情况，API名：rent
+4.用户当前借阅情况，API名：rent
 
 完整路径：http://{hostname}:{port}/user/rent
 
