@@ -34,7 +34,7 @@ var uniResult = {
 
 /// catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     uniResult.Detail = 'NOT_FOUND';
     res.end(JSON.stringify(uniResult));
 });
@@ -56,7 +56,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     uniResult.Detail = err.message;
     res.end(JSON.stringify(uniResult));
 });

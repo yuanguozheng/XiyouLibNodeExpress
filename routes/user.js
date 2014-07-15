@@ -11,7 +11,7 @@ var getRent = require('../modules/getRent');
 var userInfo = require('../modules/userInfo');
 
 router.post('/login', function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     parsers.setCallBackHeader(req.query.jsonp);
 
     var username = req.body.username;
@@ -27,7 +27,7 @@ router.post('/login', function (req, res) {
 });
 
 router.post('/history', function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     parsers.setCallBackHeader(req.query.jsonp);
 
     var loginSession = req.body.session;
@@ -37,7 +37,7 @@ router.post('/history', function (req, res) {
 });
 
 router.post('/rent', function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     parsers.setCallBackHeader(req.query.jsonp);
 
     var loginSession = req.body.session;
@@ -47,7 +47,7 @@ router.post('/rent', function (req, res) {
 });
 
 router.post('/info', function (req, res) {
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     parsers.setCallBackHeader(req.query.jsonp);
 
     var loginSession = req.body.session;
