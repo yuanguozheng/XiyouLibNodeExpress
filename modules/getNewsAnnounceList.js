@@ -65,7 +65,7 @@ function getNewsAnnounceList(type, page, callback) {
                 'CurrentPage': currentPage,
                 'Pages': pages,
                 'Amount': amount,
-                'Announces': listData
+                'Data': listData
             };
             callback(item);
         }
