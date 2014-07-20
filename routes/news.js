@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 var parsers = require('../modules/parsers');
 
-var getNewsAnnounceList = require('../modules/getNewsAnnounceList');
+var getNewsAnnounceList = require('../modules/news/getNewsAnnounceList');
 
 router.use('/getAnnounceList', function (req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');

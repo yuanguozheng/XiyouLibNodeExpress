@@ -5,10 +5,10 @@ var express = require('express');
 var router = express.Router();
 var parsers = require('../modules/parsers');
 
-var userLogin = require('../modules/userLogin');
-var getHistoy = require('../modules/getHistory');
-var getRent = require('../modules/getRent');
-var userInfo = require('../modules/userInfo');
+var userLogin = require('../modules/user/userLogin');
+var getHistoy = require('../modules/user/getHistory');
+var getRent = require('../modules/user/getRent');
+var userInfo = require('../modules/user/userInfo');
 
 router.post('/login', function (req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
