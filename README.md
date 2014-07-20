@@ -1,37 +1,46 @@
-XiyouLibNodeExpress
+基于Node.js Express框架的西邮图书馆REST API——XiyouLibNodeExpress
 ===================
 
-### 西邮图书馆Web API-Node.js
+## API基本信息
 
-访问网址：http://api.xiyoumobile.com/xiyoulibv2/
+__&#8226; 公开URL：__ http://api.xiyoumobile.com/xiyoulibv2/
 
 请根据下面的介绍获取数据或自行搭建服务器！
 
-### 简单介绍
+## 简单介绍
 
-使用Node.js Express框架开发的西邮图书馆Web API，通过模拟网站登陆的形式抓取西邮图书馆Web页面并返回JSON或JSONP给访问者，目前仅支持获取用户借阅历史。
+使用Node.js Express框架开发的西邮图书馆REST API，通过模拟网站登陆的形式抓取西邮图书馆Web页面并返回JSON或JSONP给访问者，目前仅支持获取用户借阅历史。
 
 默认监听18000端口，部署前请使用 npm install 命令补全依赖包！
 
 百度云挂上去没有作用，所以就没按照百度云上的要求来做。
 
-### API调用方式介绍
+## API调用方式介绍
 
-JSON请求URL形式为：http://yourdomain/{api类别}/{api名}?{参数（可选）}，JSONP请求URL形式为：http://yourdomain/{api类别}/{api名}?{参数（可选）}&jsonp={回掉函数名}，格式错误则会提示NOT_FOUND错误。
+__&#8226; JSON请求URL形式为：__
+http://{hostname}:{port}/{api类别}/{api名}?{参数（可选）}
 
-### 用户相关
+__&#8226; JSONP请求URL形式为：__
+http://{hostname}:{port}/{api类别}/{api名}?{参数（可选）}&callback={回掉函数名}，格式错误则会提示NOT_FOUND错误。
 
-二级路径：/user
+## 用户相关
 
-注：用户相关API全部要求使用POST方法进行请求，且除login接口外，其他接口的访问需要附带login接口回传的session，否则返回错误信息。
+__&#8226; 二级路径：__ /user
 
-1.登陆，API名：login
+__&#8226; 支持方法：__ GET、POST
 
-完整路径：http://{hostname}:{port}/user/login
+__&#8226; 注：__ 
+用户相关API除login接口外，其他接口的访问需要附带login接口回传的session，否则返回错误信息。
 
-必选参数：username（用户名）,password（密码）
+### 1.登陆，API名：login
 
-示例代码（C#）：
+__&#8226; 完整路径：__
+http://{hostname}:{port}/user/login
+
+__&#8226; 必选参数：__
+username（用户名）,password（密码）
+
+__&#8226; 示例代码（C#）：__
 
 ```csharp
 HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create("http://127.0.0.1/user/login");
@@ -53,7 +62,7 @@ using (Stream stream = res.GetResponseStream())
     ResStr = reader.ReadToEnd();
 }
 ```
-返回格式为JSON，形式如下：
+__&#8226; 返回格式为JSON，形式如下：__
 
 ``` js
 {
@@ -64,13 +73,16 @@ using (Stream stream = res.GetResponseStream())
 
 登陆成功则Result为true，Detail为登陆成功后的Session，再次请求时可能会用到，请注意保持，登陆失败Result则为false，Detail为失败信息。
 
-2.用户信息，API名：info
+### 2.用户信息，API名：info
 
-完整路径：http://{hostname}:{port}/user/info
+__&#8226; 完整路径：__ 
+http://{hostname}:{port}/user/info
 
-必选参数：session（登陆成功后回传的Session）
+__&#8226; 支持方法：__ GET、POST
 
-返回格式为JSON，形式如下：
+__&#8226; 必选参数：__ session（登陆成功后回传的Session）
+
+__&#8226; 返回格式为JSON，形式如下：__
 
 ``` js
 {
@@ -88,13 +100,15 @@ using (Stream stream = res.GetResponseStream())
 }
 ```
 
-3.用户借阅历史，API名：history
+### 3.用户借阅历史，API名：history
 
-完整路径：http://{hostname}:{port}/user/history
+__&#8226; 完整路径：__ http://{hostname}:{port}/user/history
 
-必选参数：session（登陆成功后回传的Session）
+__&#8226; 支持方法：__ GET、POST
 
-返回格式为JSON，形式如下：
+__&#8226; 必选参数：__ session（登陆成功后回传的Session）
+
+__&#8226; 返回格式为JSON，形式如下：__
 
 ``` js
 {
@@ -112,13 +126,15 @@ using (Stream stream = res.GetResponseStream())
 }
 ```
 
-4.用户当前借阅情况，API名：rent
+### 4.用户当前借阅情况，API名：rent
 
-完整路径：http://{hostname}:{port}/user/rent
+__&#8226; 完整路径：__ http://{hostname}:{port}/user/rent
 
-必选参数：session（登陆成功后回传的Session）
+__&#8226; 支持方法：__ GET、POST
 
-返回格式为JSON，形式如下：
+__&#8226; 必选参数：__ session（登陆成功后回传的Session）
+
+__&#8226; 返回格式为JSON，形式如下：__
 
 ``` js
 {
@@ -138,39 +154,72 @@ using (Stream stream = res.GetResponseStream())
 }
 ```
 
-### 新闻公告
+## 新闻公告
 
-二级路径：/news
+__&#8226; 二级路径：__ /news
 
-注：新闻公告接口全部可使用GET或POST方法，且不限制参数形式。
+__&#8226; 注：__ 新闻公告接口全部可使用GET或POST方法，且不限制参数形式。
 
-1.公告列表，API名：getAnnounceList
-
-完整路径：http://{hostname}:{port}/news/getAnnounceList
-
-可选参数：page（所查询的公告页数，不填或超出范围自动跳至第一页）
-
-返回格式为JSON，形式如下：
-
-``` js
-{
-	"Result":true,  //标识请求是否成功
-	"Detail":
-	{
-	    "CurrentPage":1,  //当前请求的页数
-	    "Pages":7,  //总共的页数
-	    "Amount":130,  //总数
-	    "Announces":  //公告详情
-	    [
-	        {
-	            "Title":"关于暑假期间我校图书馆电子资源访问方式的通知",  //标题
-	            "Date":"2014-07-07"  //发布日期
-	        },...
-	    ]
-	}
-}
-```
+### 1.公告列表，API名：getAnnounceList
+   
+   __&#8226; 完整路径：__ http://{hostname}:{port}/news/getAnnounceList
+   
+   __&#8226; 可选参数：__ page（所查询的公告页数，不填或超出范围自动跳至第一页）
+   
+   __&#8226; 返回格式为JSON，形式如下：__
+   
+   ``` js
+   {
+   	"Result":true,  //标识请求是否成功
+   	"Detail":
+   	{
+   	    "Type":"公告",  //当前请求的文章列表类别
+   	    "CurrentPage":1,  //当前请求的页数
+   	    "Pages":7,  //总共的页数
+   	    "Amount":130,  //总数
+   	    "Data":  //公告详情
+   	    [
+   	        {
+   	            "ID":163,  //文章ID，用于获取文章详情
+   	            "Title":"关于暑假期间我校图书馆电子资源访问方式的通知",  //标题
+   	            "Date":"2014-07-07"  //发布日期
+   	        },...
+   	    ]
+   	}
+   }
+   ```
+   
+### 2.新闻列表，API名：getNewsList
+   
+   __&#8226; 完整路径：__ http://{hostname}:{port}/news/getNewsList
+   
+   __&#8226; 可选参数：__ page（所查询的新闻页数，不填或超出范围自动跳至第一页）
+   
+   __&#8226; 返回格式为JSON，形式如下：__
+   
+   ``` js
+      {
+      	"Result":true,  //标识请求是否成功
+      	"Detail":
+      	{
+      	    "Type":"新闻",  //当前请求的文章列表类别
+      	    "CurrentPage":1,  //当前请求的页数
+      	    "Pages":6,  //总共的页数
+      	    "Amount":101,  //总数
+      	    "Data":  //公告详情
+      	    [
+      	        {
+      	            "ID":102,  //文章ID，用于获取文章详情
+      	            "Title":"图书馆召开2014年度电子文献资源议标（询价）会",  //标题
+      	            "Date":"2014-06-25"  //发布日期
+      	        },...
+      	    ]
+      	}
+      }
+      ```
 
 失败则返回false和相关错误信息
+
+更多API正在开发中！
 
 如有疑问可发邮件至：yuanguozheng@msn.cn
