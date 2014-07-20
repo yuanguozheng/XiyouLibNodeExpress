@@ -18,7 +18,7 @@ function getNewsAnnounceList(type, page, callback) {
         uri = 'http://222.24.3.10/announce/all.asp?page=';
         type = '公告';
     } else {
-        callback('Param Error!');
+        callback('Param Error');
     }
     request
     (

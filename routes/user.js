@@ -11,11 +11,10 @@ var getRent = require('../modules/user/getRent');
 var userInfo = require('../modules/user/userInfo');
 
 router.use('/login', function (req, res) {
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     parsers.setCallBackHeader(req.query.jsonp);
 
-    var username = req.body.username;
-    var password = req.body.password;
+    var username = req.param.username;
+    var password = req.param.password;
     userLogin(username, password, function (result) {
         if (result != false) {
             parsers.apiReturn(res, result.Session);
@@ -27,30 +26,21 @@ router.use('/login', function (req, res) {
 });
 
 router.use('/history', function (req, res) {
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
-    parsers.setCallBackHeader(req.query.jsonp);
-
-    var loginSession = req.body.session;
+    var loginSession = req.param.session;
     getHistoy(loginSession, function (result) {
-        parsers.resultProc(result, res);
+        parsers.resultProc(req.query.jsonp, result, res);
     });
 });
 
 router.use('/rent', function (req, res) {
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
-    parsers.setCallBackHeader(req.query.jsonp);
-
-    var loginSession = req.body.session;
+    var loginSession = req.param.session;
     getRent(loginSession, function (result) {
-        parsers.resultProc(result, res);
+        parsers.resultProc(req.query.jsonp, result, res);
     });
 });
 
 router.use('/info', function (req, res) {
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
-    parsers.setCallBackHeader(req.query.jsonp);
-
-    var loginSession = req.body.session;
+    var loginSession = req.param.session;
     userInfo(loginSession, function (result) {
         parsers.resultProc(result, res);
     });

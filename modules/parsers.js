@@ -12,7 +12,8 @@ function setCallBackHeader(header) {
     callbackHeader = header;
 }
 
-function resultProc(result, res) {
+function resultProc(header, result, res) {
+    callbackHeader = header;
     if (result == 'Not Login') {
         apiError(res, 'USER_NOT_LOGIN');
     }
@@ -21,6 +22,9 @@ function resultProc(result, res) {
     }
     else if (result == 'Server Error') {
         apiError(res, 'REMOTE_SERVER_ERROR');
+    }
+    else if (result == 'Param Error') {
+        apiError(res, 'PARAM_ERROR');
     }
     else {
         apiReturn(res, result);
@@ -39,6 +43,7 @@ function apiReturn(res, content) {
 }
 
 function returnJSON(res) {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     var returnStr;
     if (callbackHeader != '' && callbackHeader) {
         returnStr = callbackHeader + "(" + JSON.stringify(uniResult) + ")";
