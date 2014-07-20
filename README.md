@@ -1,7 +1,7 @@
-基于Node.js Express框架的西邮图书馆REST API——XiyouLibNodeExpress
+XiyouLibNodeExpress
 ===================
 
-## API基本信息
+## 基于Node.js Express框架的西邮图书馆REST API
 
 __&#8226; 公开URL：__ http://api.xiyoumobile.com/xiyoulibv2/
 
@@ -162,16 +162,16 @@ __&#8226; 注：__ 新闻公告接口全部可使用GET或POST方法，且不限
 
 ### 1.公告列表，API名：getAnnounceList
    
-   __&#8226; 完整路径：__ http://{hostname}:{port}/news/getAnnounceList
+__&#8226; 完整路径：__ http://{hostname}:{port}/news/getAnnounceList
    
-   __&#8226; 可选参数：__ page（所查询的公告页数，不填或超出范围自动跳至第一页）
+__&#8226; 可选参数：__ page（所查询的公告页数，不填或超出范围自动跳至第一页）
    
-   __&#8226; 返回格式为JSON，形式如下：__
+__&#8226; 返回格式为JSON，形式如下：__
    
-   ``` js
-   {
-   	"Result":true,  //标识请求是否成功
-   	"Detail":
+``` js
+{
+    "Result":true,  //标识请求是否成功
+    "Detail":
    	{
    	    "Type":"公告",  //当前请求的文章列表类别
    	    "CurrentPage":1,  //当前请求的页数
@@ -186,37 +186,37 @@ __&#8226; 注：__ 新闻公告接口全部可使用GET或POST方法，且不限
    	        },...
    	    ]
    	}
-   }
-   ```
+}
+```
    
 ### 2.新闻列表，API名：getNewsList
    
-   __&#8226; 完整路径：__ http://{hostname}:{port}/news/getNewsList
+__&#8226; 完整路径：__ http://{hostname}:{port}/news/getNewsList
    
-   __&#8226; 可选参数：__ page（所查询的新闻页数，不填或超出范围自动跳至第一页）
+__&#8226; 可选参数：__ page（所查询的新闻页数，不填或超出范围自动跳至第一页）
    
-   __&#8226; 返回格式为JSON，形式如下：__
+__&#8226; 返回格式为JSON，形式如下：__
    
-   ``` js
-      {
-      	"Result":true,  //标识请求是否成功
-      	"Detail":
-      	{
-      	    "Type":"新闻",  //当前请求的文章列表类别
-      	    "CurrentPage":1,  //当前请求的页数
-      	    "Pages":6,  //总共的页数
-      	    "Amount":101,  //总数
-      	    "Data":  //公告详情
-      	    [
-      	        {
-      	            "ID":102,  //文章ID，用于获取文章详情
-      	            "Title":"图书馆召开2014年度电子文献资源议标（询价）会",  //标题
-      	            "Date":"2014-06-25"  //发布日期
-      	        },...
-      	    ]
-      	}
-      }
-      ```
+``` js
+{
+    "Result":true,  //标识请求是否成功
+    "Detail":
+    {
+        "Type":"新闻",  //当前请求的文章列表类别
+        "CurrentPage":1,  //当前请求的页数
+        "Pages":6,  //总共的页数
+        "Amount":101,  //总数
+        "Data":  //公告详情
+        [
+            {
+      	        "ID":102,  //文章ID，用于获取文章详情
+      	        "Title":"图书馆召开2014年度电子文献资源议标（询价）会",  //标题
+      	        "Date":"2014-06-25"  //发布日期
+      	    },...
+        ]
+    }
+}
+```
 
 失败则返回false和相关错误信息
 
