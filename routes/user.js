@@ -10,7 +10,7 @@ var getHistoy = require('../modules/user/getHistory');
 var getRent = require('../modules/user/getRent');
 var userInfo = require('../modules/user/userInfo');
 
-router.post('/login', function (req, res) {
+router.use('/login', function (req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     parsers.setCallBackHeader(req.query.jsonp);
 
@@ -26,7 +26,7 @@ router.post('/login', function (req, res) {
     });
 });
 
-router.post('/history', function (req, res) {
+router.use('/history', function (req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     parsers.setCallBackHeader(req.query.jsonp);
 
@@ -36,7 +36,7 @@ router.post('/history', function (req, res) {
     });
 });
 
-router.post('/rent', function (req, res) {
+router.use('/rent', function (req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     parsers.setCallBackHeader(req.query.jsonp);
 
@@ -46,7 +46,7 @@ router.post('/rent', function (req, res) {
     });
 });
 
-router.post('/info', function (req, res) {
+router.use('/info', function (req, res) {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     parsers.setCallBackHeader(req.query.jsonp);
 
