@@ -38,7 +38,7 @@ function userLogin(username, password, callback) {
                 callback({Result: true, Session: session});
             }
             else {
-                callback(false);
+                callback('Account Error');
             }
         });
 }

@@ -3,46 +3,50 @@
  */
 var callbackHeader;
 
+var res;
+
 var uniResult = {
     Result: false,
     Detail: null
 };
 
-function setCallBackHeader(header) {
-    callbackHeader = header;
+function resultProc(req, result, resParam) {
+    res = resParam;
+    callbackHeader = req.param('callback');
+    switch (result) {
+        case 'Account Error':
+            apiError('ACCOUNT_ERROR');
+            break;
+        case 'Not Login':
+            apiError('USER_NOT_LOGIN');
+            break;
+        case 'null':
+            apiReturn('NO_RECORD');
+            break;
+        case 'Server Error':
+            apiError('REMOTE_SERVER_ERROR');
+            break;
+        case 'Param Error':
+            apiError('PARAM_ERROR');
+            break;
+        default:
+            apiReturn(result);
+            break;
+    }
 }
 
-function resultProc(header, result, res) {
-    callbackHeader = header;
-    if (result == 'Not Login') {
-        apiError(res, 'USER_NOT_LOGIN');
-    }
-    else if (result == 'null') {
-        apiReturn(res, 'NO_RECORD');
-    }
-    else if (result == 'Server Error') {
-        apiError(res, 'REMOTE_SERVER_ERROR');
-    }
-    else if (result == 'Param Error') {
-        apiError(res, 'PARAM_ERROR');
-    }
-    else {
-        apiReturn(res, result);
-    }
-}
-
-function apiError(res, err) {
+function apiError(err) {
     uniResult.Detail = err;
     returnJSON(res);
 }
 
-function apiReturn(res, content) {
+function apiReturn(content) {
     uniResult.Result = true;
     uniResult.Detail = content;
     returnJSON(res);
 }
 
-function returnJSON(res) {
+function returnJSON() {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     var returnStr;
     if (callbackHeader != '' && callbackHeader) {
@@ -55,7 +59,3 @@ function returnJSON(res) {
 }
 
 module.exports.resultProc = resultProc;
-module.exports.apiError = apiError;
-module.exports.apiReturn = apiReturn;
-module.exports.returnJSON = returnJSON;
-module.exports.setCallBackHeader = setCallBackHeader;

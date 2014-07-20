@@ -10,14 +10,14 @@ var getNewsAnnounceList = require('../modules/news/getNewsAnnounceList');
 router.use('/getAnnounceList', function (req, res) {
     var page = req.param('page');
     getNewsAnnounceList('announce', page, function (result) {
-        parsers.resultProc(req.query.jsonp, result, res);
+        parsers.resultProc(req, result, res);
     });
 });
 
 router.use('/getNewsList', function (req, res) {
     var page = req.param('page');
     getNewsAnnounceList('news', page, function (result) {
-        parsers.resultProc(req.query.jsonp, result, res);
+        parsers.resultProc(req, result, res);
     });
 });
 
