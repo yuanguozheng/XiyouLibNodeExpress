@@ -29,6 +29,9 @@ function resultProc(req, result, resParam) {
         case 'Param Error':
             apiError('PARAM_ERROR');
             break;
+        case 'Renew Failed':
+            apiError('RENEW_FAILED');
+            break;
         default:
             apiReturn(result);
             break;
