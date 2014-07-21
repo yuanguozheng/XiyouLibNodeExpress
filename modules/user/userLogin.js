@@ -35,7 +35,7 @@ function userLogin(username, password, callback) {
             session = res.headers['set-cookie'];
             //console.log(session);
             if (body == 'ok') {
-                callback({Result: true, Session: session});
+                callback(session);
             }
             else {
                 callback('Account Error');
