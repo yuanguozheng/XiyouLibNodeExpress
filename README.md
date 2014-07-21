@@ -21,7 +21,7 @@ __&#8226; JSON请求URL形式为：__
 http://{hostname}:{port}/{api类别}/{api名}?{参数（可选）}
 
 __&#8226; JSONP请求URL形式为：__
-http://{hostname}:{port}/{api类别}/{api名}?{参数（可选）}&callback={回掉函数名}，格式错误则会提示NOT_FOUND错误。
+http://{hostname}:{port}/{api类别}/{api名}?{参数（可选）}&callback={回调函数名}，格式错误则会提示NOT_FOUND错误。
 
 ## 用户相关
 
