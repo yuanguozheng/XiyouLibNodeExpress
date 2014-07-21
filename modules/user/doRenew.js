@@ -24,7 +24,7 @@ function doRenew(session, bookInfo, callback) {
                 'action': 'Renew',
                 'book_barcode': bookInfo.Barcode,
                 'department_id': bookInfo.Department,
-                'library_id': 'A'
+                'library_id': bookInfo.Library
             }
         }, function (err, res, body) {
             if (err) {

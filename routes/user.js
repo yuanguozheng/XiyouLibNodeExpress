@@ -44,7 +44,8 @@ router.use('/renew', function (req, res) {
     var loginSession = req.param('session');
     var bookInfo = {
         'Barcode': req.param('barcode'),
-        'Department': req.param('department')
+        'Department': req.param('department_id'),
+        'Library': req.param('library_id')
     };
     doRenew(loginSession, bookInfo, function (result) {
         parsers.resultProc(req, result, res);
