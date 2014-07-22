@@ -6,8 +6,9 @@ var router = express.Router();
 var parsers = require('../modules/parsers');
 
 var getNewsAnnounceList = require('../modules/news/getNewsAnnounceList');
+var getNewAnnounceDetail = require('../modules/news/getNewsAnnounceDetail');
 
-function procListReq(type,req,res){
+function procListReq(type, req, res) {
     var page = req.param('page', 1);
     getNewsAnnounceList(type, page, function (result) {
         parsers.resultProc(req, result, res);
@@ -15,19 +16,25 @@ function procListReq(type,req,res){
 }
 
 router.use('/getAnnounceList/:page', function (req, res) {
-    procListReq('announce',req,res);
+    procListReq('announce', req, res);
 });
 
 router.use('/getAnnounceList', function (req, res) {
-    procListReq('announce',req,res);
+    procListReq('announce', req, res);
 });
 
 router.use('/getNewsList/:page', function (req, res) {
-    procListReq('news',req,res);
+    procListReq('news', req, res);
 });
 
 router.use('/getNewsList', function (req, res) {
-    procListReq('news',req,res);
+    procListReq('news', req, res);
+});
+
+router.use('/getAnnounceDetail/:id', function (req, res) {
+    getNewAnnounceDetail('announce', req.param('id'), function (result) {
+
+    });
 });
 
 module.exports = router;

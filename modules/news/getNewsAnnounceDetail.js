@@ -24,9 +24,12 @@ function getNewsAnnounceDetail(type, id, callback) {
             if (err) {
                 callback(err);
             }
-            var rawHtml = iconv.decode(body,'GBK');
+            var rawHtml = iconv.decode(body, 'GBK');
             var $ = cheerio.load(rawHtml);
-            $('table[width=720]')
+            var temp = $('td[width=720]')[1].children[1].children;
+            console.log(temp[3].children[3].children[0].children[0].data);
+            console.log(temp[7].children[3]);
+            console.log(temp[11].children[3]);
         }
     );
 }

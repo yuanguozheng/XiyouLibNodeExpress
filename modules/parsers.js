@@ -50,7 +50,6 @@ function apiReturn(content) {
 }
 
 function returnJSON() {
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     var returnStr;
     if (callbackHeader != '' && callbackHeader) {
         returnStr = callbackHeader + "(" + JSON.stringify(uniResult) + ")";
@@ -58,7 +57,12 @@ function returnJSON() {
     else {
         returnStr = JSON.stringify(uniResult);
     }
-    res.end(returnStr);
+
+    if (!res._header) {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.send(returnStr);
+    }
+    return;
 }
 
 module.exports.resultProc = resultProc;
