@@ -67,7 +67,7 @@ __&#8226; 返回格式为JSON，形式如下：__
 ``` js
 {
     "Result":true,
-    "Detail":["JSESSIONID=9795BE0A70AFD7F99435CD129CFD5FDB; Path=/opac_two"]
+    "Detail":"JSESSIONID=9795BE0A70AFD7F99435CD129CFD5FDB; Path=/opac_two"
 }
 ```
 
