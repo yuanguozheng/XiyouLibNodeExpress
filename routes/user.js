@@ -20,28 +20,32 @@ router.use('/login', function (req, res) {
 });
 
 router.use('/history', function (req, res) {
-    var loginSession = req.param('session');
+    var loginSession = [];
+    loginSession[0] = req.param('session');
     getHistoy(loginSession, function (result) {
         parsers.resultProc(req, result, res);
     });
 });
 
 router.use('/rent', function (req, res) {
-    var loginSession = req.param('session');
+    var loginSession = [];
+    loginSession[0] = req.param('session');
     getRent(loginSession, function (result) {
         parsers.resultProc(req, result, res);
     });
 });
 
 router.use('/info', function (req, res) {
-    var loginSession = req.param('session');
+    var loginSession = [];
+    loginSession[0] = req.param('session');
     userInfo(loginSession, function (result) {
         parsers.resultProc(req, result, res);
     });
 });
 
 router.use('/renew', function (req, res) {
-    var loginSession = req.param('session');
+    var loginSession = [];
+    loginSession[0] = req.param('session');
     var bookInfo = {
         'Barcode': req.param('barcode'),
         'Department': req.param('department_id'),
