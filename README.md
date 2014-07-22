@@ -189,7 +189,7 @@ __&#8226; 注：__ 新闻公告接口全部可使用GET或POST方法，且不限
 
 ### 1.公告列表，API名：getAnnounceList
    
-__&#8226; 完整路径：__ http://{hostname}:{port}/news/getAnnounceList
+__&#8226; 完整路径：__ http://{hostname}:{port}/news/getAnnounceList/{page} 或 http://{hostname}:{port}/news/getAnnounceList/?page=1
    
 __&#8226; 可选参数：__ page（所查询的公告页数，不填或超出范围自动跳至第一页）
    
@@ -218,7 +218,7 @@ __&#8226; 返回格式为JSON，形式如下：__
    
 ### 2.新闻列表，API名：getNewsList
    
-__&#8226; 完整路径：__ http://{hostname}:{port}/news/getNewsList
+__&#8226; 完整路径：__ http://{hostname}:{port}/news/getNewsList/{page} 或 http://{hostname}:{port}/news/getNewsList/?page=1
    
 __&#8226; 可选参数：__ page（所查询的新闻页数，不填或超出范围自动跳至第一页）
    

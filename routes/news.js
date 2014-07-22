@@ -7,18 +7,27 @@ var parsers = require('../modules/parsers');
 
 var getNewsAnnounceList = require('../modules/news/getNewsAnnounceList');
 
-router.use('/getAnnounceList', function (req, res) {
-    var page = req.param('page');
-    getNewsAnnounceList('announce', page, function (result) {
+function procListReq(type,req,res){
+    var page = req.param('page', 1);
+    getNewsAnnounceList(type, page, function (result) {
         parsers.resultProc(req, result, res);
     });
+}
+
+router.use('/getAnnounceList/:page', function (req, res) {
+    procListReq('announce',req,res);
+});
+
+router.use('/getAnnounceList', function (req, res) {
+    procListReq('announce',req,res);
+});
+
+router.use('/getNewsList/:page', function (req, res) {
+    procListReq('news',req,res);
 });
 
 router.use('/getNewsList', function (req, res) {
-    var page = req.param('page');
-    getNewsAnnounceList('news', page, function (result) {
-        parsers.resultProc(req, result, res);
-    });
+    procListReq('news',req,res);
 });
 
 module.exports = router;
