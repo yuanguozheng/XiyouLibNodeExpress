@@ -10,6 +10,7 @@ var session;
 function userLogin(username, password, callback) {
     if (username == '' || password == '') {
         callback(false);
+        return;
     }
     request(
         {
@@ -29,6 +30,7 @@ function userLogin(username, password, callback) {
         function (err, res, body) {
             if (err) {
                 callback(err);
+                return;
             }
             body = iconv.decode(body, "GB2312");
             //console.log(body);
@@ -36,9 +38,11 @@ function userLogin(username, password, callback) {
             //console.log(session);
             if (body == 'ok') {
                 callback(session[0]);
+                return;
             }
             else {
                 callback('Account Error');
+                return;
             }
         });
 }

@@ -19,6 +19,7 @@ function getNewsAnnounceList(type, page, callback) {
         type = '公告';
     } else {
         callback('Param Error');
+        return;
     }
     request
     (
@@ -28,6 +29,7 @@ function getNewsAnnounceList(type, page, callback) {
         }, function (err, res, body) {
             if (err) {
                 callback(err);
+                return;
             }
             var rawHtml = iconv.decode(body, 'GBK');
             var $ = cheerio.load(rawHtml);
@@ -68,6 +70,7 @@ function getNewsAnnounceList(type, page, callback) {
                 'Data': listData
             };
             callback(item);
+            return;
         }
     );
 }

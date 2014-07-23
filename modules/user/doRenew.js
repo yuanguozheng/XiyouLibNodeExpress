@@ -10,9 +10,11 @@ var session;
 function doRenew(session, bookInfo, callback) {
     if (session == '' || session == null) {
         callback('Not Login');
+        return;
     } else if (session.length != 0) {
         if (session[0] == '') {
             callback('Not Login');
+            return;
         }
     }
     request
@@ -33,6 +35,7 @@ function doRenew(session, bookInfo, callback) {
         }, function (err, res, body) {
             if (err) {
                 callback(err);
+                return;
             }
 
             var rawHtml = iconv.decode(body, 'GBK');
@@ -43,9 +46,11 @@ function doRenew(session, bookInfo, callback) {
             alertStr = alertStr.substr(7, alertStr.length - 10);
             if (alertStr.search('续借失败')) {
                 callback('Renew Failed');
+                return;
             } else if (alertStr.search('续借成功')) {
                 var date = alertStr.substr(alertStr.length - 10).replace(/\//g, '-');
                 callback(date);
+                return;
             }
         }
     );

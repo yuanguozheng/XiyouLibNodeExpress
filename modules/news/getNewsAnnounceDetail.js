@@ -28,8 +28,8 @@ function getNewsAnnounceDetail(type, id, callback) {
             var $ = cheerio.load(rawHtml);
             var temp = $('td[width=720]')[1].children[1].children;
             console.log(temp[3].children[3].children[0].children[0].data);
-            console.log(temp[7].children[3]);
-            console.log(temp[11].children[3]);
+            console.log($(temp[7].children[3].children[0].children).text());
+            console.log(temp[11].children[3].children[0].children[0].data);
         }
     );
 }

@@ -10,9 +10,11 @@ var session;
 module.exports = function getRent(session, callback) {
     if (session == '' || session == null) {
         callback('Not Login');
+        return;
     } else if (session.length != 0) {
         if (session[0] == '') {
             callback('Not Login');
+            return;
         }
     }
     request
@@ -26,6 +28,7 @@ module.exports = function getRent(session, callback) {
         }, function (err, res, body) {
             if (err) {
                 callback(err);
+                return;
             }
             var rawHtml = (iconv.decode(body, "GB2312")).replace(/td_color_2/g, 'td_color_1');
 
@@ -33,6 +36,7 @@ module.exports = function getRent(session, callback) {
 
             if ($('#no_text').html() != null) {
                 callback('null');
+                return;
             }
 
             var rentData = [];
@@ -74,6 +78,7 @@ module.exports = function getRent(session, callback) {
             });
 
             callback(rentData);
+            return;
         }
     )
 };

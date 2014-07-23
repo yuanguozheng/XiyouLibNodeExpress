@@ -10,9 +10,11 @@ var session;
 module.exports = function getHistory(session, callback) {
     if (session == '' || session == null) {
         callback('Not Login');
+        return;
     } else if (session.length != 0) {
         if (session[0] == '') {
             callback('Not Login');
+            return;
         }
     }
     request
@@ -26,12 +28,14 @@ module.exports = function getHistory(session, callback) {
         }, function (err, res, body) {
             if (err) {
                 callback(err);
+                return;
             }
             body = (iconv.decode(body, "GB2312")).replace(/td_color_2/g, 'td_color_1');
 
             var $ = cheerio.load(body);
             if ($('#no_text').html() != null) {
                 callback('Not Login');
+                return;
             }
 
             $ = cheerio.load(body);
@@ -52,6 +56,7 @@ module.exports = function getHistory(session, callback) {
                 };
             });
             callback(info);
+            return;
         }
     )
 }
