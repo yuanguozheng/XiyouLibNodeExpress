@@ -33,12 +33,6 @@ module.exports = function getHistory(session, callback) {
             body = (iconv.decode(body, "GB2312")).replace(/td_color_2/g, 'td_color_1');
 
             var $ = cheerio.load(body);
-            if ($('#no_text').html() != null) {
-                callback('Not Login');
-                return;
-            }
-
-            $ = cheerio.load(body);
 
             if ($('#no_text').html() != null) {
                 callback('null');

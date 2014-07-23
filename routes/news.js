@@ -15,10 +15,14 @@ function procListReq(type, req, res) {
     });
 }
 
-router.use('/getAnnounceList/:page', function (req, res) {
-    procListReq('announce', req, res);
+router.use('/getList/:type/:page', function (req, res) {
+    var page = req.param('page', 1);
+    var type = req.param('type','announce');
+    getNewsAnnounceList(type, page, function (result) {
+        parsers.resultProc(req, result, res);
+    });
 });
-
+/*
 router.use('/getAnnounceList', function (req, res) {
     procListReq('announce', req, res);
 });
@@ -29,10 +33,12 @@ router.use('/getNewsList/:page', function (req, res) {
 
 router.use('/getNewsList', function (req, res) {
     procListReq('news', req, res);
-});
+});*/
 
-router.use('/getAnnounceDetail/:id', function (req, res) {
-    getNewAnnounceDetail('announce', req.param('id'), function (result) {
+router.use('/getDetail/:type/:format/:id', function (req, res) {
+    var id = req.param('id');
+    var type = req.param('type','announce');
+    getNewAnnounceDetail(type,id,function (result) {
 
     });
 });
