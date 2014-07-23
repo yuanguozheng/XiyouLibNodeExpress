@@ -39,6 +39,12 @@ module.exports = function getHistory(session, callback) {
             }
 
             $ = cheerio.load(body);
+
+            if ($('#no_text').html() != null) {
+                callback('null');
+                return;
+            }
+
             var info = [];
             var content = $('tr[class=td_color_1]').each(function (i, element) {
                 //console.log($(this).text());
