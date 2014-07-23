@@ -59,7 +59,7 @@ module.exports = function getHistory(session, callback) {
             return;
         }
     )
-}
+};
 
 function RTrim(str) {
     return str.replace(/(\s*$)/g, "");
