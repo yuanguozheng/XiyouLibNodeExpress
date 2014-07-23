@@ -8,8 +8,12 @@ var iconv = require('iconv-lite');
 var session;
 
 module.exports = function getHistory(session, callback) {
-    if(session=='' || session==null){
+    if (session == '' || session == null) {
         callback('Not Login');
+    } else if (session.length != 0) {
+        if (session[0] == '') {
+            callback('Not Login');
+        }
     }
     request
     (
@@ -52,6 +56,6 @@ module.exports = function getHistory(session, callback) {
     )
 }
 
-function RTrim(str){
+function RTrim(str) {
     return str.replace(/(\s*$)/g, "");
 }

@@ -39,6 +39,7 @@ function resultProc(req, result, resParam) {
 }
 
 function apiError(err) {
+    uniResult.Result = false;
     uniResult.Detail = err;
     returnJSON(res);
 }

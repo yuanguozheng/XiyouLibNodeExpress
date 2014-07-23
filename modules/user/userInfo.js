@@ -6,8 +6,12 @@ var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 
 function userInfo(session, callback) {
-    if(session=='' || session==null){
+    if (session == '' || session == null) {
         callback('Not Login');
+    } else if (session.length != 0) {
+        if (session[0] == '') {
+            callback('Not Login');
+        }
     }
     request
     (

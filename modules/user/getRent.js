@@ -10,6 +10,10 @@ var session;
 module.exports = function getRent(session, callback) {
     if (session == '' || session == null) {
         callback('Not Login');
+    } else if (session.length != 0) {
+        if (session[0] == '') {
+            callback('Not Login');
+        }
     }
     request
     (
