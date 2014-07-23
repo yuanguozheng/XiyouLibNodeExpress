@@ -32,24 +32,39 @@ module.exports = function getRent(session, callback) {
             }
 
             var rentData = [];
+            var department_id, library_id, state;
+
             $('TR[class="td_color_1"]').each(function (i) {
                 var temp = $(this).children();
+                state = RTrim($(temp[5]).text());
                 var canRenew = true;
                 if (RTrim($(temp[5]).text()) == '本馆续借')
                     canRenew = false;
                 var jsRaw = temp[7].children[0].attribs['onclick'];
-                jsRaw = jsRaw.substr(jsRaw.indexOf('Renew') + 6).replace(/\);/g, '').replace(/\'/g, '');
-                var jsInfo = jsRaw.split(',');
+                if (jsRaw == undefined) {
+                    jsRaw = temp[7].children[0].children[0].data;
+                    if (jsRaw == '过期暂停') {
+                        canRenew = false;
+                        department_id = null;
+                        library_id = null;
+                        state = '过期暂停';
+                    }
+                } else {
+                    jsRaw = jsRaw.substr(jsRaw.indexOf('Renew') + 6).replace(/\);/g, '').replace(/\'/g, '');
+                    var jsInfo = jsRaw.split(',');
+                    department_id = jsInfo[1];
+                    library_id = jsInfo[2];
+                }
                 rentData[i] =
                 {
                     'Title': RTrim($(temp[2]).text()),
                     'Barcode': RTrim($(temp[3]).text()),
                     'Department': RTrim($(temp[4]).text()),
-                    'State': RTrim($(temp[5]).text()),
+                    'State': state,
                     'Date': RTrim($(temp[6]).text().replace(/\//g, '')),
                     'CanRenew': canRenew,
-                    'Depaertment_id': jsInfo[1],
-                    'Library_id': jsInfo[2]
+                    'Depaertment_id': department_id,
+                    'Library_id': library_id
                 };
 
             });
