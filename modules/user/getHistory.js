@@ -50,10 +50,12 @@ module.exports = function getHistory(session, callback) {
                 //console.log($(this).text());
 
                 var temp = [];
+                console.log($(this).text());
                 temp = ($(this).text().replace(/\r\n\t\t\t\t/g, '\n').replace(/\r\n/g, '')).split('\n');
+                console.log(temp);
                 temp.splice(0, 2);
                 temp.splice(4);
-
+                console.log(temp);
                 info[i] = {
                     Title: RTrim(temp[0]),
                     Barcode: RTrim(temp[1]),
@@ -65,7 +67,7 @@ module.exports = function getHistory(session, callback) {
             return;
         }
     )
-}
+};
 
 function RTrim(str) {
     return str.replace(/(\s*$)/g, "");

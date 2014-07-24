@@ -6,10 +6,11 @@ var router = express.Router();
 var parsers = require('../modules/parsers');
 
 var userLogin = require('../modules/user/userLogin');
-var getHistoy = require('../modules/user/getHistory');
+var getHistory = require('../modules/user/getHistory');
 var getRent = require('../modules/user/getRent');
 var userInfo = require('../modules/user/userInfo');
 var doRenew = require('../modules/user/doRenew');
+var getFavorite=require('../modules/user/getFavorite');
 
 router.use('/login', function (req, res) {
     var username = req.param('username');
@@ -22,7 +23,7 @@ router.use('/login', function (req, res) {
 router.use('/history', function (req, res) {
     var loginSession = [];
     loginSession[0] = req.param('session');
-    getHistoy(loginSession, function (result) {
+    getHistory(loginSession, function (result) {
         parsers.resultProc(req, result, res);
     });
 });
@@ -55,5 +56,14 @@ router.use('/renew', function (req, res) {
         parsers.resultProc(req, result, res);
     });
 });
+
+router.use('/favorite', function (req, res) {
+    var loginSession = [];
+    loginSession[0] = req.param('session');
+    getFavorite(loginSession, function (result) {
+        parsers.resultProc(req, result, res);
+    });
+});
+
 
 module.exports = router;
