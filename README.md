@@ -213,13 +213,14 @@ __&#8226; 二级路径：__ /news
 
 __&#8226; 注：__ 新闻公告接口全部可使用GET或POST方法，且不限制参数形式。
 
-### 1.公告列表，API名：getAnnounceList
+### 1.公告、新闻列表，API名：getList
    
 __&#8226; 完整路径：__ 
-http://{hostname}:{port}/news/getAnnounceList/{page} 或 
-http://{hostname}:{port}/news/getAnnounceList/?page=1
+http://{hostname}:{port}/news/getList/{type}/{page} 
    
-__&#8226; 可选参数：__ page（所查询的公告页数，不填或超出范围自动跳至第一页）
+__&#8226; 必选参数：__ 
+type（“news”（新闻）、“announce”（公告）供选，其他值则报错）
+page（所查询的公告页数，超出范围自动跳至第一页，最新为1，不填报错）
    
 __&#8226; 返回格式为JSON，形式如下：__
    
@@ -244,13 +245,15 @@ __&#8226; 返回格式为JSON，形式如下：__
 }
 ```
    
-### 2.新闻列表，API名：getNewsList
+### 2.公告、新闻详情，API名：getDetail
    
 __&#8226; 完整路径：__ 
-http://{hostname}:{port}/news/getNewsList/{page} 或 
-http://{hostname}:{port}/news/getNewsList/?page=1
+http://{hostname}:{port}/news/getDetail/{type}/{format}/{id}
    
-__&#8226; 可选参数：__ page（所查询的新闻页数，不填或超出范围自动跳至第一页）
+__&#8226; 必选参数：__ 
+type（“news”（新闻）、“announce”（公告）供选，其他值则报错）
+format（“html”（正文使用HTML格式）、“text”（正文使用纯文本格式）供选，其他值则报错）
+id（从列表中获取到的新闻或公告的id）
    
 __&#8226; 返回格式为JSON，形式如下：__
    
@@ -259,18 +262,10 @@ __&#8226; 返回格式为JSON，形式如下：__
     "Result":true,  //标识请求是否成功
     "Detail":
     {
-        "Type":"新闻",  //当前请求的文章列表类别
-        "CurrentPage":1,  //当前请求的页数
-        "Pages":6,  //总共的页数
-        "Amount":101,  //总数
-        "Data":  //公告详情
-        [
-            {
-      	        "ID":102,  //文章ID，用于获取文章详情
-      	        "Title":"图书馆召开2014年度电子文献资源议标（询价）会",  //标题
-      	        "Date":"2014-06-25"  //发布日期
-      	    },...
-        ]
+        "Title":"图书馆召开2014年度电子文献资源议标（询价）会",  //标题
+        "Publisher":"图书馆",  //发布者
+        "Date":"2014-6-25",  //发布日期
+        "Passage":"<p><font>&#x3000;&#x3000;&#x4E3A;&#x4E86;&#x4E……"  //正文
     }
 }
 ```
