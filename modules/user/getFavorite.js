@@ -38,7 +38,7 @@ module.exports = function getHistory(session, callback) {
             //console.log($);/*测试是否将数据流加载到jquery对象*/
             if ($('#tianqi').length==2) {
                 //console.log($('#tianqi').last().text());
-                callback('亲，您还没有收藏哦！');
+                callback('null');
                 return;
             }
             else {
