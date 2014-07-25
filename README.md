@@ -164,10 +164,10 @@ __&#8226; 支持方法：__ GET、POST
 
 __&#8226; 必选参数：__ 
 
-session（登陆成功后回传的Session）
-barcode（查询续借的图书时所获取的图书馆内部条形码）
-department_id（查询续借的图书时所获取的书库ID号）
-library_id（查询续借的图书时所获取的分馆ID号）
+*session（登陆成功后回传的Session）
+*barcode（查询续借的图书时所获取的图书馆内部条形码）
+*department_id（查询续借的图书时所获取的书库ID号）
+*library_id（查询续借的图书时所获取的分馆ID号）
 
 __&#8226; 返回格式为JSON，形式如下：__
 
@@ -215,15 +215,15 @@ __&#8226; 完整路径：__ http://{hostname}:{port}/user/addFav
 __&#8226; 支持方法：__ GET、POST
 
 __&#8226; 必选参数：__ 
-session（登陆成功后回传的Session）
-id(图书馆内控制号)
+1.session（登陆成功后回传的Session）
+2.id(图书馆内控制号)
 __&#8226; 返回格式为字符串，说明如下：__
 
-ADDED_SUCCEED：收藏成功
-ALREADY_IN_FAVORITE：已经收藏过了
-ADDED_FAILED：收藏失败
-USER_NOT_LOGIN：用户未登录（session过期）
-PARAM_ERROR：参数错误，缺少参数
+1.ADDED_SUCCEED：收藏成功
+2.ALREADY_IN_FAVORITE：已经收藏过了
+3.ADDED_FAILED：收藏失败
+4.USER_NOT_LOGIN：用户未登录（session过期）
+5.PARAM_ERROR：参数错误，缺少参数
 
 ### 8.删除图书收藏，API名：delFav
 
@@ -232,14 +232,14 @@ __&#8226; 完整路径：__ http://{hostname}:{port}/user/delFav
 __&#8226; 支持方法：__ GET、POST
 
 __&#8226; 必选参数：__ 
-session（登陆成功后回传的Session）
+1.session（登陆成功后回传的Session）
 id(图书馆内控制号)
 __&#8226; 返回格式为字符串，说明如下：__
 
-DELETED_SUCCEED：删除成功
-DELETED_FAILED：删除失败
-USER_NOT_LOGIN：用户未登录（session过期）
-PARAM_ERROR：参数错误，缺少参数
+1.DELETED_SUCCEED：删除成功
+2.DELETED_FAILED：删除失败
+3.USER_NOT_LOGIN：用户未登录（session过期）
+4.PARAM_ERROR：参数错误，缺少参数
 
 ## 新闻公告
 
