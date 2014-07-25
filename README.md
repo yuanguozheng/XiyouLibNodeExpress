@@ -214,7 +214,7 @@ __&#8226; 完整路径：__ http://{hostname}:{port}/user/addFav
 
 __&#8226; 支持方法：__ GET、POST
 
-__&#8226; 必选参数：
+__&#8226; 必选参数：__
 
 1. session（登陆成功后回传的Session）.
 2. id(图书馆内控制号).
@@ -233,17 +233,17 @@ __&#8226; 完整路径：__ http://{hostname}:{port}/user/delFav
 
 __&#8226; 支持方法：__ GET、POST
 
-__&#8226; 必选参数：
+__&#8226; 必选参数：__
 
 1. session（登陆成功后回传的Session）
 2. id(图书馆内控制号)
 
 __&#8226; 返回格式为字符串，说明如下：
 
-* DELETED_SUCCEED：删除成功.
-* DELETED_FAILED：删除失败.
-* USER_NOT_LOGIN：用户未登录（session过期）.
-* PARAM_ERROR：参数错误，缺少参数.
+* DELETED_SUCCEED：删除成功
+* DELETED_FAILED：删除失败
+* USER_NOT_LOGIN：用户未登录（session过期）
+* PARAM_ERROR：参数错误，缺少参数
 
 ## 新闻公告
 
