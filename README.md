@@ -225,7 +225,7 @@ __&#8226; 返回格式为字符串，说明如下:
 * ALREADY_IN_FAVORITE：已经收藏过了.
 * ADDED_FAILED：收藏失败.
 * USER_NOT_LOGIN：用户未登录（session过期）.
-* PARAM_ERROR：参数错误，缺少参数.
+* PARAM_ERROR：参数错误，缺少参数
 
 ### 8.删除图书收藏，API名: delFav
 
@@ -238,7 +238,7 @@ __&#8226; 必选参数：__
 1. session（登陆成功后回传的Session）
 2. id(图书馆内控制号)
 
-__&#8226; 返回格式为字符串，说明如下：
+__&#8226; 返回格式为字符串，说明如下：__
 
 * DELETED_SUCCEED：删除成功
 * DELETED_FAILED：删除失败
