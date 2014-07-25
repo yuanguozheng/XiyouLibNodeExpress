@@ -12,7 +12,7 @@ router.use('/search', function (req, res) {
     var suchen_type = req.param('wordType', 1);
     var suchen_match = req.param('matchMethod', 'qx');
     var recordtype = req.param('recordType', 'all');
-    var library_id = req.param('lib', 'all');
+    var library_id = 'all';
     var show_type = 'wenzi';
     var size = req.param('size', 20);
     var page = req.param('page', 1);
@@ -21,6 +21,10 @@ router.use('/search', function (req, res) {
 
     if (page * 1 < 1) {
         page = 1;
+    }
+
+    if (size * 1 < 1) {
+        size = 20;
     }
 
     var params = {
@@ -40,7 +44,7 @@ router.use('/search', function (req, res) {
         "orderby": orderby,
         "kind": 'simple',
         "curpage": page
-    }
+    };
     doSearch(params, function (result) {
         parsers.resultProc(req, result, res);
     });
