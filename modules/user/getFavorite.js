@@ -1,6 +1,6 @@
 /**
  * Created by 国正 on 2014/7/21.
- * last edit by 杨文鹏 on 2014/7/23
+ * last edit by 杨文鹏 on 2014/7/25
  */
 var request = require('request');
 var cheerio = require('cheerio');
@@ -38,7 +38,7 @@ module.exports = function getHistory(session, callback) {
             //console.log($);/*测试是否将数据流加载到jquery对象*/
             if ($('#tianqi').length==2) {
                 //console.log($('#tianqi').last().text());
-                callback('亲，您还没有收藏哦！');
+                callback('null');
                 return;
             }
             else {
@@ -46,8 +46,15 @@ module.exports = function getHistory(session, callback) {
                 var content =$('table[width="325"]').each(function (i, element) {
                     //console.log($(element).find('td[align="left"]').length);/*测试获取数据的数目*/
                     var temp = [];
+                    var id;
                     $(element).find('td[align="left"]').each(function(i, element){
                         //console.log(i+':'+$(element).text());/*测试每条数据显示*/
+                        if(i==0){
+                            var temporary= element.children[0].attribs['href'];
+                            var index=temporary.indexOf('=')+1;
+                            id=temporary.substring(index);
+                            //console.log(id);/*测试每条数据显示*/
+                        }
                         temp[i]=$(element).text().trim();
                     });
                     //console.log(temp);/*测试导出的数组*/
@@ -56,13 +63,9 @@ module.exports = function getHistory(session, callback) {
                         Title:temp[0],
                         Pub: temp[1],
                         Sort: temp[6],
-<<<<<<< HEAD
+                        ISBN:temp[3].split(',')[0].replace(/-/g,''),
                         Author: temp[4],
-                        ISBN:temp[3].split(',')[0].replace(/-/g,'')
-=======
-                        ISBN:temp[3].replace(/-/g,''),
-                        Author: temp[4]
->>>>>>> origin/master
+                        ID:id
                     };
                 });
                 //console.log(info);//console.log(temp);/*测试筛选后的数组*/
