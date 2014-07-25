@@ -32,6 +32,7 @@ function resultProc(req, result, resParam) {
         case 'Renew Failed':
             apiError('RENEW_FAILED');
             break;
+<<<<<<< HEAD
         case 'Added Succeed':
             apiReturn('ADDED_SUCCEED');
             break;
@@ -46,6 +47,10 @@ function resultProc(req, result, resParam) {
             break;
         case 'Deleted Failed':
             apiError('DELETED_FAILED');
+=======
+        case 'Out Of Range':
+            apiError('OUT_OF_RANGE');
+>>>>>>> origin/master
             break;
         default:
             apiReturn(result);
