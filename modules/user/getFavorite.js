@@ -38,7 +38,7 @@ module.exports = function getHistory(session, callback) {
             //console.log($);/*测试是否将数据流加载到jquery对象*/
             if ($('#tianqi').length==2) {
                 //console.log($('#tianqi').last().text());
-                callback('null');  //callback string must be in Eng & must be handled.
+                callback('亲，您还没有收藏哦！');
                 return;
             }
             else {
@@ -56,8 +56,13 @@ module.exports = function getHistory(session, callback) {
                         Title:temp[0],
                         Pub: temp[1],
                         Sort: temp[6],
+<<<<<<< HEAD
                         Author: temp[4],
                         ISBN:temp[3].split(',')[0].replace(/-/g,'')
+=======
+                        ISBN:temp[3].replace(/-/g,''),
+                        Author: temp[4]
+>>>>>>> origin/master
                     };
                 });
                 //console.log(info);//console.log(temp);/*测试筛选后的数组*/
