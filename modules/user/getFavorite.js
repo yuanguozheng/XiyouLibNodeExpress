@@ -8,7 +8,7 @@ var iconv = require('iconv-lite');
 
 var session;
 
-module.exports = function getHistory(session, callback) {
+module.exports = function getFavorite(session, callback) {
     if (session == '' || session == null) {
         callback('Not Login');
         return;

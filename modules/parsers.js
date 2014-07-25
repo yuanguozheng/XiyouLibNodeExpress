@@ -32,6 +32,21 @@ function resultProc(req, result, resParam) {
         case 'Renew Failed':
             apiError('RENEW_FAILED');
             break;
+        case 'Added Succeed':
+            apiReturn('ADDED_SUCCEED');
+            break;
+        case 'Already In Favorite':
+            apiReturn('ALREADY_IN_FAVORITE');
+            break;
+        case 'Added Failed':
+            apiError('ADDED_FAILED');
+            break;
+        case 'Deleted Succeed':
+            apiReturn('DELETED_SUCCEED');
+            break;
+        case 'Deleted Failed':
+            apiError('DELETED_FAILED');
+            break;
         default:
             apiReturn(result);
             break;

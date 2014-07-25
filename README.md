@@ -208,6 +208,39 @@ __&#8226; 返回格式为JSON，形式如下：__
     ]
 }
 ```
+### 7.添加图书收藏，API名：addFav
+
+__&#8226; 完整路径：__ http://{hostname}:{port}/user/addFav
+
+__&#8226; 支持方法：__ GET、POST
+
+__&#8226; 必选参数：__ 
+session（登陆成功后回传的Session）
+id(图书馆内控制号)
+__&#8226; 返回格式为字符串，说明如下：__
+
+ADDED_SUCCEED：收藏成功
+ALREADY_IN_FAVORITE：已经收藏过了
+ADDED_FAILED：收藏失败
+USER_NOT_LOGIN：用户未登录（session过期）
+PARAM_ERROR：参数错误，缺少参数
+
+### 8.删除图书收藏，API名：delFav
+
+__&#8226; 完整路径：__ http://{hostname}:{port}/user/delFav
+
+__&#8226; 支持方法：__ GET、POST
+
+__&#8226; 必选参数：__ 
+session（登陆成功后回传的Session）
+id(图书馆内控制号)
+__&#8226; 返回格式为字符串，说明如下：__
+
+DELETED_SUCCEED：删除成功
+DELETED_FAILED：删除失败
+USER_NOT_LOGIN：用户未登录（session过期）
+PARAM_ERROR：参数错误，缺少参数
+
 ## 新闻公告
 
 __&#8226; 二级路径：__ /news

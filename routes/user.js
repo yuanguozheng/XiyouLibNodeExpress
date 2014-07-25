@@ -10,7 +10,9 @@ var getHistory = require('../modules/user/getHistory');
 var getRent = require('../modules/user/getRent');
 var userInfo = require('../modules/user/userInfo');
 var doRenew = require('../modules/user/doRenew');
-var getFavorite=require('../modules/user/getFavorite');
+var getFavorite = require('../modules/user/getFavorite');
+var addFavorite = require('../modules/user/addFavorite');
+var delFavorite = require('../modules/user/delFavorite');
 
 router.use('/login', function (req, res) {
     var username = req.param('username');
@@ -61,6 +63,26 @@ router.use('/favorite', function (req, res) {
     var loginSession = [];
     loginSession[0] = req.param('session');
     getFavorite(loginSession, function (result) {
+        parsers.resultProc(req, result, res);
+    });
+});
+
+router.use('/addFav', function (req, res) {
+    var loginSession = [];
+    loginSession[0] = req.param('session');
+    var id = req.param('id');
+    addFavorite(loginSession, id, function (result) {
+        parsers.resultProc(req, result, res);
+    });
+});
+router.use('/delFav', function (req, res) {
+    var loginSession = [];
+    loginSession[0] = req.param('session');
+    var mustInfo = {
+        'userAccount':req.param('username'),
+        'recCtrlId':req.param('id')
+    };
+    delFavorite(loginSession, mustInfo, function (result) {
         parsers.resultProc(req, result, res);
     });
 });
