@@ -32,6 +32,9 @@ function resultProc(req, result, resParam) {
         case 'Renew Failed':
             apiError('RENEW_FAILED');
             break;
+        case 'Out Of Range':
+            apiError('OUT_OF_RANGE');
+            break;
         default:
             apiReturn(result);
             break;
