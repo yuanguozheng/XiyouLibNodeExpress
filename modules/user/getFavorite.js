@@ -57,7 +57,7 @@ module.exports = function getHistory(session, callback) {
                         Pub: temp[1],
                         Sort: temp[6],
                         Author: temp[4],
-                        ISBN:temp[3].replace(/-/g,'')
+                        ISBN:temp[3].split(',')[0].replace(/-/g,'')
                     };
                 });
                 //console.log(info);//console.log(temp);/*测试筛选后的数组*/
