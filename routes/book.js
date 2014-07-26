@@ -6,6 +6,7 @@ var router = express.Router();
 var parsers = require('../modules/parsers');
 
 var doSearch = require('../modules/book/search');
+var getBookDetail = require('../modules/book/detail');
 
 router.use('/search', function (req, res) {
     var keyword = req.param('keyword');
@@ -45,7 +46,22 @@ router.use('/search', function (req, res) {
         "kind": 'simple',
         "curpage": page
     };
+
     doSearch(params, function (result) {
+        parsers.resultProc(req, result, res);
+    });
+});
+
+router.use('/detail/id/:id', function (req, res) {
+    var id = req.param('id');
+    getBookDetail.byID(id, function (result) {
+        parsers.resultProc(req, result, res);
+    });
+});
+
+router.use('/detail/barcode/:barcode', function (req, res) {
+    var barcode = req.param('barcode');
+    getBookDetail.byBarcode(barcode, function (result) {
         parsers.resultProc(req, result, res);
     });
 });

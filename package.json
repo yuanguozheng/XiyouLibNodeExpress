@@ -1,6 +1,6 @@
 {
     "name": "XiyouLibNodeExpress",
-    "version": "0.0.4",
+    "version": "0.0.8",
     "keywords": ["Xiyou", "Library", "XUPT"],
     "description": "API for Xi'an University of Posts & Telecommunications Library by Node.js!",
     "homepage": "http://github.com/yuanguozheng/XiyouLibNodeExpress",
