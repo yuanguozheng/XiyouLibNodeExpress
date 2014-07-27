@@ -372,6 +372,62 @@ __&#8226; 返回格式为JSON，形式如下：__
 }
 ```
 
+### 2.图书详情，API名：detail
+   
+__&#8226; 完整路径：__ 
+http://{hostname}:{port}/book/detail/id/{id} 或 http://{hostname}:{port}/book/detail/barcode/{barcode}
+   
+__&#8226; 必选参数：__ id或barcode（控制号或条形码）
+
+__&#8226; 返回格式为JSON，形式如下：__
+   
+``` js
+{
+    "Result":true,  //标识请求是否成功
+    "Detail":
+    {
+        "ISBN":"9787115341440",  //所查图书的ISBN
+        "SecondTitle":"Object oriented programming of C++",  //副标题
+        "Pub":"北京  :人民邮电出版社 ,2014.2",  //出版信息
+        "Tilte":"C + + 面向对象程序设计 Object oriented programming of C++",  //书名、主标题
+        "Form":"245页  :图  ;26cm",  //载体形态
+        "Author":"宋春花 4主编 吕进来 4主编 马建芬 4编著 程鹏 4编著 王幸民 4编著",   //作者
+        "Sort":"TP312C++",  //中图分类号
+        "Subject":"C语言  --程序设计",  //主题
+        "RentTimes":2,  //借阅次数
+        "FavTimes":0,   //收藏次数
+        "BrowseTimes":1,   //浏览次数
+        "Total":4,   //藏书数量
+        "Avaliable":2,   //可借数量
+        "CirculationInfo":   //流通信息数组
+        [
+            {
+                "Barcode":"03451696",   //条形码
+                "Sort":"TP312C++/521",   //索书号
+                "Department":"通信计算机库（长安校区）",   //所在部门
+                "Status":"本馆借出",   //状态
+                "Date":"2014/07/21"   //应还日期，可借则为null
+            },……
+        ],
+        "ReferBooks":   //相关图书信息数组
+        [
+            {
+                "ID":"01h0077946",  //控制号
+                "Title":"C++程序设计基础教程",   //书名
+                "Author":"孙涛,"   //作者
+            },
+        ]
+    }
+}
+```
+
+注：
+
+1.图书信息字段不固定，有可能会产生Summary（简介），或其他信息不完整情况！
+
+2.建议使用id（控制号）查询图书，以barcode（条形码）查询速度较慢！
+
+
 失败则在返回内容中，Result字段值为false，Detail字段为错误信息。
 
 ## 错误或无效信息
