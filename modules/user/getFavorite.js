@@ -6,6 +6,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 
+var getDoubanInfo = require('../other/getDoubanInfo');
 var session;
 
 module.exports = function getFavorite(session, callback) {
@@ -36,39 +37,38 @@ module.exports = function getFavorite(session, callback) {
             //console.log(body);/*测试数据流是否读进来*/
             var $ = cheerio.load(body);
             //console.log($);/*测试是否将数据流加载到jquery对象*/
-            if ($('#tianqi').length==2) {
+            if ($('#tianqi').length == 2) {
                 //console.log($('#tianqi').last().text());
                 callback('null');
                 return;
-            }
-            else {
+            } else {
                 var info = [];
-                var content =$('table[width="325"]').each(function (i, element) {
+                $('table[width="325"]').each(function (i, element) {
                     //console.log($(element).find('td[align="left"]').length);/*测试获取数据的数目*/
                     var temp = [];
                     var id;
-                    $(element).find('td[align="left"]').each(function(i, element){
+                    $(element).find('td[align="left"]').each(function (i, element) {
                         //console.log(i+':'+$(element).text());/*测试每条数据显示*/
-                        if(i==0){
-                            var temporary= element.children[0].attribs['href'];
-                            var index=temporary.indexOf('=')+1;
-                            id=temporary.substring(index);
+                        if (i == 0) {
+                            var temporary = element.children[0].attribs['href'];
+                            var index = temporary.indexOf('=') + 1;
+                            id = temporary.substring(index);
                             //console.log(id);/*测试每条数据显示*/
                         }
-                        temp[i]=$(element).text().trim();
+                        temp[i] = $(element).text().trim();
                     });
                     //console.log(temp);/*测试导出的数组*/
                     info[i] = {
                         //对需要的字段进行筛选
-                        Title:temp[0],
+                        Title: temp[0],
                         Pub: temp[1],
                         Sort: temp[6],
-                        ISBN:temp[3].split(',')[0].replace(/-/g,''),
+                        ISBN: temp[3].split(',')[0].replace(/-/g, ''),
                         Author: temp[4],
-                        ID:id
+                        ID: id
                     };
                 });
-                //console.log(info);//console.log(temp);/*测试筛选后的数组*/
+                //console.log(info);
                 callback(info);
                 return;
             }

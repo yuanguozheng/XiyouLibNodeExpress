@@ -6,7 +6,7 @@ var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 
 var search = require('./search');
-var dbOperation = require('../mongodb/dbOperation');
+var getDoubanInfo = require('../other/getDoubanInfo');
 
 function getDetailByBarcode(barcode, callback) {
     if (barcode == '' || barcode == undefined) {
@@ -245,7 +245,7 @@ function getBookDetail(id, callback) {
                         Author_Info: result.author_intro,
                         Summary: result.summary,
                         Price: result.price
-                    }
+                    };
                     baseInfo.DoubanInfo = doubanInfo;
                 }
                 callback(baseInfo);
@@ -253,47 +253,6 @@ function getBookDetail(id, callback) {
             });
         }
     );
-}
-
-function getDoubanInfo(id, isbn, callback) {
-    dbOperation.getFromDB(id, function (result) {
-        if (result.Result == true) {
-            if (result.Info == 'null') {
-                request
-                (
-                    {
-                        uri: 'https://api.douban.com/v2/book/isbn/' + isbn
-                    }, function (err, res, body) {
-                        //console.log(isbn);
-                        if (body.indexOf('Not Found') != -1) {
-                            callback(null);
-                            return;
-                        }
-                        var doubandata = JSON.parse(body);
-                        if (doubandata.code == 6000) {
-                            callback(null);
-                            return;
-                        }
-                        callback(JSON.parse(body));
-                        dbOperation.writeToDB({ID: id, ISBN: isbn, DoubanJSON: body}, function (result) {
-                            if (result.Result == false) {
-                                callback(null);
-                                return;
-                            } else {
-                                return;
-                            }
-                        });
-                    }
-                );
-            } else {
-                callback(JSON.parse(result.Info));
-                return;
-            }
-        } else {
-            callback(null);
-            return;
-        }
-    });
 }
 
 module.exports.byID = getBookDetail;

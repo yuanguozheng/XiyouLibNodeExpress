@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var users = require('./routes/user');
 var books = require('./routes/book');
 var news = require('./routes/news');
+var others=require('./routes/other');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use('/user', users);
 app.use('/book', books);
 app.use('/news', news);
+app.use('/other',others);
 
 var uniResult = {
     Result: false,
