@@ -43,6 +43,7 @@
         "request": "~2.37.0",
         "iconv-lite": "~0.4.3",
         "cheerio": "~0.17.0",
-        "static-favicon": "~1.0.0"
+        "static-favicon": "~1.0.0",
+        "mongoose": "~3.8.14"
     }
 }

@@ -6,6 +6,7 @@ var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 
 var search = require('./search');
+var dbOperation = require('../mongodb/dbOperation');
 
 function getDetailByBarcode(barcode, callback) {
     if (barcode == '' || barcode == undefined) {
@@ -45,10 +46,32 @@ function getDetailByBarcode(barcode, callback) {
 }
 
 function getBookDetail(id, callback) {
+    var ctrlID = id;
     if (id == '' || id == undefined) {
         callback('Param Error');
         return;
     }
+    var baseInfo =
+    {
+        ID: id,
+        ISBN: "",
+        SecondTitle: "",
+        Pub: "",
+        Summary: "",
+        Tilte: "",
+        Form: "",
+        Author: "",
+        Sort: "",
+        Subject: "",
+        RentTimes: 0,
+        FavTimes: 0,
+        BrowseTimes: 0,
+        Total: 0,
+        Avaliable: 0,
+        CirculationInfo: [],
+        ReferBooks: [],
+        DoubanInfo: null
+    };
     request
     (
         {
@@ -69,62 +92,72 @@ function getBookDetail(id, callback) {
                 }
             }
 
-            var $$ = cheerio.load($('td[width=820]').html().replace(/td_color_1/g, 'td_color_2'));
+            var $$ = cheerio.load($('td[width=670]').html());
 
-            var baseInfo;
             var ISBN, SecondTitle, Pub, Summary, Tilte, Form, Author, Sort, Subject;
-            $$('tr.td_color_2').each(function (i, e) {
-                baseInfo = ($$(e).text().trim()).split(' : ');
-                switch (baseInfo[0]) {
+            $$('tr').each(function (i, e) {
+                var pageBaseInfo = ($$(e).text().trim()).split(' : ');
+                if (pageBaseInfo.length == 1) {
+                    pageBaseInfo = ($$(e).text().trim()).split(':');
+                }
+                switch (pageBaseInfo[0].trim()) {
+                    case '标准书号':
                     case 'ISBN/ISSN':
-                        ISBN = baseInfo[1].replace(/-/g, '');
+                        ISBN = pageBaseInfo[1].replace(/-/g, '').trim();
                         break;
                     case '并列题名':
-                        SecondTitle = baseInfo[1];
+                        SecondTitle = pageBaseInfo[1].trim();
                         break;
+                    case '出版社':
                     case '出版':
-                        Pub = baseInfo[1];
+                        Pub = pageBaseInfo[1].trim();
                         break;
                     case '简介':
-                        Summary = baseInfo[1];
+                        Summary = pageBaseInfo[1].trim();
                         break;
+                    case '题名':
                     case '题名和责任者说明':
-                        Tilte = baseInfo[1].split('/')[0].trim();
+                        Tilte = pageBaseInfo[1].split('/')[0].trim();
                         break;
                     case '载体形态':
-                        Form = baseInfo[1];
+                        Form = pageBaseInfo[1].trim();
                         break;
                     case '责任者':
-                        Author = baseInfo[1];
+                        Author = pageBaseInfo[1].trim();
                         break;
+                    case '分类号':
                     case '中图分类号':
-                        Sort = baseInfo[1];
+                        Sort = pageBaseInfo[1].trim();
                         break;
+                    case '主题词':
                     case '主题':
-                        Subject = baseInfo[1];
+                        Subject = pageBaseInfo[1].trim();
                         break;
                 }
-                baseInfo =
-                {
-                    ISBN: ISBN,
-                    SecondTitle: SecondTitle,
-                    Pub: Pub,
-                    Summary: Summary,
-                    Tilte: Tilte,
-                    Form: Form,
-                    Author: Author,
-                    Sort: Sort,
-                    Subject: Subject,
-                    RentTimes: 0,
-                    FavTimes: 0,
-                    BrowseTimes: 0,
-                    Total: 0,
-                    Avaliable: 0,
-                    CirculationInfo: [],
-                    ReferBooks: []
-                    //DoubanInfo:
-                };
             });
+
+            baseInfo =
+            {
+                ID: ctrlID,
+                ISBN: ISBN,
+                SecondTitle: SecondTitle,
+                Pub: Pub,
+                Summary: Summary,
+                Tilte: Tilte,
+                Form: Form,
+                Author: Author,
+                Sort: Sort,
+                Subject: Subject,
+                RentTimes: 0,
+                FavTimes: 0,
+                BrowseTimes: 0,
+                Total: 0,
+                Avaliable: 0,
+                CirculationInfo: [],
+                ReferBooks: [],
+                DoubanInfo: null
+            };
+
 
             $$ = cheerio.load($('td[width=181]').html().replace(/td_color_1/g, 'td_color_2'));
             var rentTimes, favTimes, browseTimes;
@@ -191,10 +224,76 @@ function getBookDetail(id, callback) {
                 }
             });
             baseInfo.ReferBooks = referBook;
-            callback(baseInfo);
-            return;
+            var doubanInfo;
+
+            getDoubanInfo(ctrlID, ISBN, function (result) {
+                if (result == null) {
+                    doubanInfo = null;
+                } else {
+                    doubanInfo = {
+                        Rating: result.rating,
+                        Author: result.author,
+                        PubDate: result.pubdate,
+                        Binding: result.binding,
+                        Pages: result.pages,
+                        Images: result.images,
+                        Publisher: result.publisher,
+                        ISBN10: result.isbn10,
+                        ISBN13: result.isbn13,
+                        Title: result.title,
+                        Alt_Title: result.alt_title,
+                        Author_Info: result.author_intro,
+                        Summary: result.summary,
+                        Price: result.price
+                    }
+                    baseInfo.DoubanInfo = doubanInfo;
+                }
+                callback(baseInfo);
+                return;
+            });
         }
     );
+}
+
+function getDoubanInfo(id, isbn, callback) {
+    dbOperation.getFromDB(id, function (result) {
+        if (result.Result == true) {
+            if (result.Info == 'null') {
+                request
+                (
+                    {
+                        uri: 'https://api.douban.com/v2/book/isbn/' + isbn
+                    }, function (err, res, body) {
+                        //console.log(isbn);
+                        if (body.indexOf('Not Found') != -1) {
+                            callback(null);
+                            return;
+                        }
+                        var doubandata = JSON.parse(body);
+                        if (doubandata.code == 6000) {
+                            callback(null);
+                            return;
+                        }
+                        callback(JSON.parse(body));
+                        dbOperation.writeToDB({ID: id, ISBN: isbn, DoubanJSON: body}, function (result) {
+                            if (result.Result == false) {
+                                callback(null);
+                                return;
+                            } else {
+                                return;
+                            }
+                        });
+                    }
+                );
+            } else {
+                callback(JSON.parse(result.Info));
+                return;
+            }
+        } else {
+            callback(null);
+            return;
+        }
+    });
 }
 
 module.exports.byID = getBookDetail;
