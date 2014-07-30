@@ -6,7 +6,6 @@ var request = require('request');
 var cheerio = require('cheerio');
 var iconv = require('iconv-lite');
 
-var getDoubanInfo = require('../other/getDoubanInfo');
 var session;
 
 module.exports = function getFavorite(session, callback) {
