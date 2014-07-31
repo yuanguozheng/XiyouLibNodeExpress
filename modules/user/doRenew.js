@@ -44,10 +44,10 @@ function doRenew(session, bookInfo, callback) {
             var temp = $('#my_lib_jieyue').next();
             var alertStr = temp[0].children[0].data.trim();
             alertStr = alertStr.substr(7, alertStr.length - 10);
-            if (alertStr.search('续借失败')) {
+            if (alertStr.indexOf('续借失败') != -1) {
                 callback('Renew Failed');
                 return;
-            } else if (alertStr.search('续借成功')) {
+            } else if (alertStr.indexOf('续借成功') != -1) {
                 var date = alertStr.substr(alertStr.length - 10).replace(/\//g, '-');
                 callback(date);
                 return;
