@@ -71,7 +71,7 @@ module.exports = function getRent(session, callback) {
                     'State': state,
                     'Date': RTrim($(temp[6]).text().replace(/\//g, '')),
                     'CanRenew': canRenew,
-                    'Depaertment_id': department_id,
+                    'Department_id': department_id,
                     'Library_id': library_id
                 };
 
