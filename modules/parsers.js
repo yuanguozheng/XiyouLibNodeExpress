@@ -50,6 +50,9 @@ function resultProc(req, result, resParam) {
         case 'Out Of Range':
             apiError('OUT_OF_RANGE');
             break;
+        case 'Session Invalid':
+            apiError('SESSION_INVALID');
+            break;
         default:
             apiReturn(result);
             break;

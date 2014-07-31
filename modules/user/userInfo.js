@@ -32,6 +32,11 @@ function userInfo(session, callback) {
 
             var $ = cheerio.load(rawHtml);
 
+            if($('body').text().trim()==''){
+                callback('Session Invalid');
+                return;
+            }
+
             var infoTable = $('table[width=600]');
 
             var id = $(infoTable.children()[0].children[3]).text().trim();
