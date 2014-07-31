@@ -24,7 +24,8 @@ function doRenew(session, bookInfo, callback) {
             method: 'POST',
             encoding: null,
             headers: {
-                ContentType: 'application/x-www-form-urlencoded'
+                ContentType: 'application/x-www-form-urlencoded',
+                Cookie: session
             },
             form: {
                 'action': 'Renew',
