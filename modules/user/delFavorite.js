@@ -17,9 +17,8 @@ module.exports = function addFavorite(session, mustInfo, callback) {
             return;
         }
     }
-    else
-    {
-        if(mustInfo.userAccount==''||mustInfo.userAccount==null||mustInfo.recCtrlId==''||mustInfo.recCtrlId==null){
+    else {
+        if (mustInfo.userAccount == '' || mustInfo.userAccount == null || mustInfo.recCtrlId == '' || mustInfo.recCtrlId == null) {
             callback('Param Error');
             return;
         }
@@ -40,18 +39,17 @@ module.exports = function addFavorite(session, mustInfo, callback) {
             },
             followAllRedirect: true
         },
-        function(err, res, body) {
+        function (err, res, body) {
             if (err) {
                 callback(err);
                 return;
             }
-            else{
+            else {
                 getFavorite(session, function (result) {
                     //console.log(result);
-                    for(var i= 0;i<result.length;i++)
-                    {
+                    for (var i = 0; i < result.length; i++) {
                         //console.log(result[i].ID);
-                        if(result[i].ID==mustInfo.recCtrlId){
+                        if (result[i].ID == mustInfo.recCtrlId) {
                             callback('Deleted Failed');
                             return;
                         }

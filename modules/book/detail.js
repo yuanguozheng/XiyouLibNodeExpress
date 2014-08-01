@@ -33,13 +33,13 @@ function getDetailByBarcode(barcode, callback) {
     };
 
     search(params, function (result) {
-        if (result.Ammount != 0) {
+        if (result != 'null') {
             getBookDetail(result.BookData[0].ID, function (result) {
                 callback(result);
                 return;
             });
         } else {
-            callback('null')
+            callback('null');
             return;
         }
     });
@@ -143,7 +143,7 @@ function getBookDetail(id, callback) {
                 SecondTitle: SecondTitle,
                 Pub: Pub,
                 Summary: Summary,
-                Tilte: Tilte,
+                Title: Tilte,
                 Form: Form,
                 Author: Author,
                 Sort: Sort,
