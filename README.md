@@ -417,7 +417,38 @@ __&#8226; 返回格式为JSON，形式如下：__
                 "Title":"C++程序设计基础教程",   //书名
                 "Author":"孙涛,"   //作者
             },
-        ]
+        ],
+       "DoubanInfo":   //来自豆瓣的图书信息，若豆瓣数据库无该书信息则为null
+        {
+            "Rating":  //评分
+            {
+                "max":10,  //满分
+                "numRaters":2,  //评分次数
+                "average":"0.0",   //平均分
+                "min":0   //最低分
+            },
+            "Author":  //作者
+            [
+                "Pedro Teixeria"
+            ],
+            "PubDate":"2013-12-1",  //出版日期
+            "Binding":"平装",   //装订类型
+            "Pages":"368",   //页数
+            "Images":  //封面图片
+            {
+                "small":"http://img5.douban.com/spic/s27188987.jpg",  //小图
+                "large":"http://img5.douban.com/lpic/s27188987.jpg",  //大图
+                "medium":"http://img5.douban.com/mpic/s27188987.jpg"  //中图
+            },
+            "Publisher":"清华大学出版社",  //出版社
+            "ISBN10":"7302344418",   //10位标准号
+            "ISBN13":"9787302344414",   //13位标准号
+            "Title":"Node.js高级编程",  //书名
+            "Alt_Title":"Professional Node.js: Building JavaScript-Based Scalable Software",  //副标题
+            "Author_Info":"Pedro Teixeria是一位高产的开源项目程序员………………",  //作者简介
+            "Summary":"Node.js是一种主流框架……………………",   //图书简介
+            "Price":"58.00"   //价格
+        }
     }
 }
 ```
