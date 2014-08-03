@@ -19,7 +19,6 @@ router.use('/search', function (req, res) {
     var page = req.param('page', 1);
     var ordersc = req.param('ordersc', 'desc');
     var orderby = req.param('orderby', 'pubdate_date');
-
     if (page * 1 < 1) {
         page = 1;
     }

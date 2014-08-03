@@ -152,7 +152,7 @@ function getBookDetail(id, callback) {
                 FavTimes: 0,
                 BrowseTimes: 0,
                 Total: 0,
-                Avaliable: 0,
+                Available: 0,
                 CirculationInfo: [],
                 ReferBooks: [],
                 DoubanInfo: null

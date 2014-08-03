@@ -30,7 +30,6 @@ function getRank(type, size, callback) {
     request
     (
         {
-            uri:
         }
     );
 }

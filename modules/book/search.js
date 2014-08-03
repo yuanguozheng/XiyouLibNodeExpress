@@ -164,7 +164,7 @@ function doSearch(params, callback) {
                 OrderBy: orderbyType,
                 OrderSc: orderscType,
                 BookData: bookData
-            }
+            };
 
             callback(result);
             return;
