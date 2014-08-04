@@ -50,13 +50,6 @@ router.use('/search', function (req, res) {
     doSearch(params, function (result) {
         parsers.resultProc(req, result, res);
     });
-
-    /*GB2312Encoder(keyword, function (result) {
-        params.suchen_word = result;
-        doSearch(params, function (result) {
-            parsers.resultProc(req, result, res);
-        });
-    });*/
 });
 
 router.use('/detail/id/:id', function (req, res) {
