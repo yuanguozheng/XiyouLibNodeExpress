@@ -7,6 +7,7 @@ var parsers = require('../modules/parsers');
 
 var doSearch = require('../modules/book/search');
 var getBookDetail = require('../modules/book/detail');
+var GB2312Encoder = require('../modules/other/gb2312Encoder');
 
 router.use('/search', function (req, res) {
     var keyword = req.param('keyword');
@@ -49,6 +50,13 @@ router.use('/search', function (req, res) {
     doSearch(params, function (result) {
         parsers.resultProc(req, result, res);
     });
+
+    /*GB2312Encoder(keyword, function (result) {
+        params.suchen_word = result;
+        doSearch(params, function (result) {
+            parsers.resultProc(req, result, res);
+        });
+    });*/
 });
 
 router.use('/detail/id/:id', function (req, res) {

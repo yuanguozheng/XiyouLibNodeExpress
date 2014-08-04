@@ -44,7 +44,7 @@ module.exports = function getHistory(session, callback) {
                 //console.log($(this).text());
 
                 var temp = [];
-                console.log($(this).text());
+                //console.log($(this).text());
                 temp = ($(this).text().replace(/\r\n\t\t\t\t/g, '\n').replace(/\r\n/g, '')).split('\n');
                 console.log(temp);
                 temp.splice(0, 2);

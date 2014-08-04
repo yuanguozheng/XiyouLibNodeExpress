@@ -85,12 +85,12 @@ function doSearch(params, callback) {
         callback('Param Error');
         return;
     }
+
     request
     (
         {
-            uri: 'http://222.24.3.7:8080/opac_two/search2/searchout.jsp',
-            method: 'POST',
-            encoding: null,
+            /*uri: 'http://222.24.3.7:8080/opac_two/search2/searchout.jsp',*/
+            uri: 'http://10.0.1.12:8091/XiyouLibSearchWebServer/Default.aspx',
             headers: {
                 ContentType: 'application/x-www-form-urlencoded'
             },
@@ -101,7 +101,8 @@ function doSearch(params, callback) {
                 return;
             }
 
-            var rawHtml = iconv.decode(body, 'GB2312');
+            //var rawHtml = iconv.decode(body, 'GB2312');
+            var rawHtml = body;
 
             rawHtml = rawHtml.replace(/td_color_1/g, 'td_color_2');
             var $ = cheerio.load(rawHtml);
