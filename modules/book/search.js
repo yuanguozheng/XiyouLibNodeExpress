@@ -86,11 +86,22 @@ function doSearch(params, callback) {
         return;
     }
 
+    var uri;
+    var option;
+    var encode;
+    if (hasChinese(params.suchen_word)) {
+        uri = 'http://10.0.1.12:8091/XiyouLibSearchWebServer/Default.aspx';
+        encode = 'utf-8';
+    }
+    else {
+        uri = 'http://222.24.3.7:8080/opac_two/search2/searchout.jsp';
+        encode = 'gb2312';
+    }
     request
     (
         {
-            /*uri: 'http://222.24.3.7:8080/opac_two/search2/searchout.jsp',*/
-            uri: 'http://10.0.1.12:8091/XiyouLibSearchWebServer/Default.aspx',
+            uri: uri,
+            encoding: null,
             headers: {
                 ContentType: 'application/x-www-form-urlencoded'
             },
@@ -101,8 +112,8 @@ function doSearch(params, callback) {
                 return;
             }
 
-            //var rawHtml = iconv.decode(body, 'GB2312');
-            var rawHtml = body;
+            var rawHtml = iconv.decode(body, encode);
+            //var rawHtml = body;
 
             rawHtml = rawHtml.replace(/td_color_1/g, 'td_color_2');
             var $ = cheerio.load(rawHtml);
@@ -171,6 +182,15 @@ function doSearch(params, callback) {
             return;
         }
     );
+}
+
+function hasChinese(str) {
+
+    if (/.*[\u4e00-\u9fa5]+.*$/.test(str)) // \u 表示unicode
+    {
+        return true;
+    }
+    return false;
 }
 
 module.exports = doSearch;
