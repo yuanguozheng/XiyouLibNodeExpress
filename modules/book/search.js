@@ -86,22 +86,22 @@ function doSearch(params, callback) {
         return;
     }
 
-    var uri;
-    var option;
+    var reqUri = ''
     var encode;
     if (hasChinese(params.suchen_word)) {
-        uri = 'http://10.0.1.12:8091/XiyouLibSearchWebServer/Default.aspx';
-        encode = 'utf-8';
+        reqUri = 'http://api.xiyoumobile.com/XiyouLibSearchWebServer/Default.aspx';
+        encode = 'utf8';
     }
     else {
-        uri = 'http://222.24.3.7:8080/opac_two/search2/searchout.jsp';
-        encode = 'gb2312';
+        reqUri = 'http://222.24.3.7:8080/opac_two/search2/searchout.jsp';
+        encode = 'GB2312';
     }
     request
     (
         {
-            uri: uri,
+            uri: reqUri,
             encoding: null,
+            method: 'POST',
             headers: {
                 ContentType: 'application/x-www-form-urlencoded'
             },
@@ -113,7 +113,6 @@ function doSearch(params, callback) {
             }
 
             var rawHtml = iconv.decode(body, encode);
-            //var rawHtml = body;
 
             rawHtml = rawHtml.replace(/td_color_1/g, 'td_color_2');
             var $ = cheerio.load(rawHtml);
