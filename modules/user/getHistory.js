@@ -40,25 +40,25 @@ module.exports = function getHistory(session, callback) {
             }
 
             var info = [];
-            var content = $('tr[class=td_color_1]').each(function (i, element) {
-                //console.log($(this).text());
-
+            var tempArr = $('tr[class=td_color_1]');
+            tempArr.each(function (i, element) {
                 var temp = [];
-                //console.log($(this).text());
                 temp = ($(this).text().replace(/\r\n\t\t\t\t/g, '\n').replace(/\r\n/g, '')).split('\n');
-                //console.log(temp);
                 temp.splice(0, 2);
                 temp.splice(4);
-                //console.log(temp);
-                info[i] = {
-                    Title: RTrim(temp[0]),
-                    Barcode: RTrim(temp[1]),
-                    Type: RTrim(temp[2]),
-                    Date: RTrim(temp[3])
-                };
+                info.push(
+                    {
+                        Title: RTrim(temp[0]),
+                        Barcode: RTrim(temp[1]),
+                        Type: RTrim(temp[2]),
+                        Date: RTrim(temp[3])
+                    }
+                );
+                if (i == tempArr.length - 1) {
+                    callback(info);
+                    return;
+                }
             });
-            callback(info);
-            return;
         }
     )
 };
