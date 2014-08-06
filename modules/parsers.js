@@ -53,6 +53,9 @@ function resultProc(req, result, resParam) {
         case 'Session Invalid':
             apiError('SESSION_INVALID');
             break;
+        case 'No Info':
+            apiError('NO_INFO');
+            break;
         default:
             apiReturn(result);
             break;

@@ -87,7 +87,7 @@ function getBookDetail(id, callback) {
 
             if ($('div#tianqi').length != 0) {
                 if ($('div#tianqi').text().trim() == '该记录控制号无效！') {
-                    callback('null')
+                    callback('null');
                     return;
                 }
             }
