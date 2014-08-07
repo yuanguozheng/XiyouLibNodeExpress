@@ -122,10 +122,10 @@ function doSearch(params, callback) {
                 return;
             }
 
-            var ammount, currentPage, pages, size = 20, bookData = [];
+            var amount, currentPage, pages, size = 20, bookData = [];
 
             var baseInfo = $("span.opac_red");
-            ammount = $(baseInfo[0]).text() * 1;
+            amount = $(baseInfo[0]).text() * 1;
             currentPage = $(baseInfo[2]).text() * 1;
             pages = $(baseInfo[3]).text() * 1;
 
@@ -144,9 +144,8 @@ function doSearch(params, callback) {
                 var isbn = $(e.children[9]).text().trim().split(',')[0].replace(/-/g, '');
                 var year = $(e.children[11]).text().trim() * 1;
                 var sort = $(e.children[13]).text().trim();
-                //var inlib = $(e.children[15]).text().trim();
                 var total = e.children[15].children[1].data.replace(/[^0-9]/ig, '') * 1;
-                var avaliable = e.children[15].children[4].data.replace(/[^0-9]/ig, '') * 1;
+                var available = e.children[15].children[4].data.replace(/[^0-9]/ig, '') * 1;
 
                 bookData[i] =
                 {
@@ -158,13 +157,13 @@ function doSearch(params, callback) {
                     Year: year,
                     Sort: sort,
                     Total: total,
-                    Avaliable: avaliable
+                    Available: available
                 };
             });
 
             var result =
             {
-                Ammount: ammount,
+                Amount: amount,
                 CurrentPage: currentPage,
                 Pages: pages,
                 Size: bookData.length,
