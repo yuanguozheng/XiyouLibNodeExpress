@@ -113,6 +113,7 @@ function getBookDetail(id, callback) {
                         Pub = pageBaseInfo[1].trim();
                         break;
                     case '简介':
+                    case '摘要':
                         Summary = pageBaseInfo[1].trim();
                         break;
                     case '题名':
