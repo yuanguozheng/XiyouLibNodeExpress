@@ -71,7 +71,7 @@ __&#8226; 返回格式为JSON，形式如下：__
 }
 ```
 
-登陆成功则Result为true，Detail为登陆成功后的Session，再次请求时可能会用到，请注意保持，登陆失败Result则为false，Detail为失败信息。
+登陆成功则Result为true，Detail为登陆成功后的Session，再次请求时可能会用到，请注意保存（在使用此Session时请以session=JSESSIONID=9795BE0A70AFD7F99435CD129CFD5FDB;%20Path=/opac_two的形式传入），登陆失败Result则为false，Detail为失败信息。
 
 ### 2.用户信息，API名：info
 
