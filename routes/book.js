@@ -7,8 +7,7 @@ var parsers = require('../modules/parsers');
 
 var doSearch = require('../modules/book/search');
 var getBookDetail = require('../modules/book/detail');
-var GB2312Encoder = require('../modules/other/gb2312Encoder');
-var getRank=require('../modules/book/rank');
+var getRank = require('../modules/book/rank');
 
 router.use('/search', function (req, res) {
     var keyword = req.param('keyword');
@@ -21,6 +20,7 @@ router.use('/search', function (req, res) {
     var page = req.param('page', 1);
     var ordersc = req.param('ordersc', 'desc');
     var orderby = req.param('orderby', 'pubdate_date');
+    var images = req.param('images', false);
     if (page * 1 < 1) {
         page = 1;
     }
@@ -45,7 +45,8 @@ router.use('/search', function (req, res) {
         "ordersc": ordersc,
         "orderby": orderby,
         "kind": 'simple',
-        "curpage": page
+        "curpage": page,
+        "images": images
     };
 
     doSearch(params, function (result) {
@@ -67,11 +68,11 @@ router.use('/detail/barcode/:barcode', function (req, res) {
     });
 });
 
-router.use('/rank',function(req,res){
-    var type=req.param('type','1');
-    var size=req.param('size','10');
-    getRank(type,size,function(result){
-       parsers.resultProc(req,result,res);
+router.use('/rank', function (req, res) {
+    var type = req.param('type', '1');
+    var size = req.param('size', '10');
+    getRank(type, size, function (result) {
+        parsers.resultProc(req, result, res);
     });
 });
 module.exports = router;

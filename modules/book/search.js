@@ -85,16 +85,13 @@ function doSearch(params, callback) {
         callback('Param Error');
         return;
     }
+    var images = params.images ? true : false;
 
-    var reqUri = ''
-    var encode;
+    var encode = 'gb2312';
+    var reqUri = 'http://222.24.3.7:8080/opac_two/search2/searchout.jsp';
     if (hasChinese(params.suchen_word)) {
-        reqUri = 'http://api.xiyoumobile.com/XiyouLibSearchWebServer/Default.aspx';
-        encode = 'utf8';
-    }
-    else {
-        reqUri = 'http://222.24.3.7:8080/opac_two/search2/searchout.jsp';
-        encode = 'GB2312';
+        var urlencode = require('urlencode')
+        params.suchen_word = urlencode.encode(params.suchen_word, 'gbk');
     }
     request
     (
@@ -103,17 +100,15 @@ function doSearch(params, callback) {
             encoding: null,
             method: 'POST',
             headers: {
-                ContentType: 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            form: params
+            body: paramsStr(params)
         }, function (err, res, body) {
             if (err) {
-                callback(err)
+                callback(err);
                 return;
             }
-
             var rawHtml = iconv.decode(body, encode);
-
             rawHtml = rawHtml.replace(/td_color_1/g, 'td_color_2');
             var $ = cheerio.load(rawHtml);
 
@@ -133,6 +128,20 @@ function doSearch(params, callback) {
                 callback('Out Of Range');
                 return;
             }
+
+            var result =
+            {
+                Amount: amount,
+                CurrentPage: currentPage,
+                Pages: pages,
+                Size: bookData.length,
+                Keyword: params.suchen_word,
+                RecordType: recordType,
+                KeywordType: keywordSet[params.suchen_type],
+                MatchType: matchSet[params.suchen_match],
+                OrderBy: orderbyType,
+                OrderSc: orderscType
+            };
 
             var tr = $('tr.td_color_2');
             tr.each(function (i, e) {
@@ -159,27 +168,39 @@ function doSearch(params, callback) {
                     Total: total,
                     Available: available
                 };
+                if (images && tr.length <= 10) {
+                    var douban = require('../other/getDoubanInfo');
+                    douban(id, isbn, function (info) {
+                        if (info == null) {
+                            bookData[i].Images = null;
+                        } else if (info.hasOwnProperty('images')) {
+                            bookData[i].Images = info.images;
+                        } else {
+                            bookData[i].Images = null;
+                        }
+                        if (tr.length - 1 == i) {
+                            result.BookData = bookData;
+                            callback(result);
+                        }
+                    });
+                }
             });
 
-            var result =
-            {
-                Amount: amount,
-                CurrentPage: currentPage,
-                Pages: pages,
-                Size: bookData.length,
-                Keyword: params.suchen_word,
-                RecordType: recordType,
-                KeywordType: keywordSet[params.suchen_type],
-                MatchType: matchSet[params.suchen_match],
-                OrderBy: orderbyType,
-                OrderSc: orderscType,
-                BookData: bookData
-            };
-
-            callback(result);
-            return;
+            if (!images) {
+                result.BookData = bookData;
+                callback(result);
+            }
         }
     );
+}
+
+function paramsStr(newArgs) {
+    var string = '';
+    for (var k in newArgs) {
+        string += '&' + k + '=' + newArgs[k];
+    }
+    string = string.substr(1);
+    return string;
 }
 
 function hasChinese(str) {

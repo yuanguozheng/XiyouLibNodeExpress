@@ -1,49 +1,54 @@
 {
-    "name": "XiyouLibNodeExpress",
-    "version": "0.0.8",
-    "keywords": ["Xiyou", "Library", "XUPT"],
-    "description": "API for Xi'an University of Posts & Telecommunications Library by Node.js!",
-    "homepage": "http://github.com/yuanguozheng/XiyouLibNodeExpress",
-    "maintainers": [
-        {
-            "name": "Yuan Guozheng",
-            "email": "yuanguozheng@outlook.com"
-        }
-    ],
-    "contributors": [
-        {
-            "name": "Yuan Guozheng",
-            "web": "http://www.xiyoumobile.com/"
-        },
-        {
-            "name": "Yang Wenpeng",
-            "web": "http://www.xiyoumobile.com/"
-        }
-    ],
-    "bugs": {
-        "web": "http://github.com/yuanguozheng/XiyouLibNodeExpress/issues",
-        "email": "yuanguozheng@outlook.com"
-    },
-    "licenses": [
-        {
-            "type": "ALv2",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
-        }
-    ],
-    "private": true,
-    "scripts": {
-        "start": "node ./bin/www"
-    },
-    "dependencies": {
-        "express": "~4.2.0",
-        "morgan": "~1.0.0",
-        "cookie-parser": "~1.0.1",
-        "body-parser": "~1.0.0",
-        "debug": "~0.7.4",
-        "request": "~2.37.0",
-        "iconv-lite": "~0.4.3",
-        "cheerio": "~0.17.0",
-        "static-favicon": "~1.0.0",
-        "mongoose": "~3.8.14"
+  "name": "XiyouLibNodeExpress",
+  "version": "0.0.8",
+  "keywords": [
+    "Xiyou",
+    "Library",
+    "XUPT"
+  ],
+  "description": "API for Xi'an University of Posts & Telecommunications Library by Node.js!",
+  "homepage": "http://github.com/yuanguozheng/XiyouLibNodeExpress",
+  "maintainers": [
+    {
+      "name": "Yuan Guozheng",
+      "email": "yuanguozheng@outlook.com"
     }
+  ],
+  "contributors": [
+    {
+      "name": "Yuan Guozheng",
+      "web": "http://www.xiyoumobile.com/"
+    },
+    {
+      "name": "Yang Wenpeng",
+      "web": "http://www.xiyoumobile.com/"
+    }
+  ],
+  "bugs": {
+    "web": "http://github.com/yuanguozheng/XiyouLibNodeExpress/issues",
+    "email": "yuanguozheng@outlook.com"
+  },
+  "licenses": [
+    {
+      "type": "ALv2",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+    }
+  ],
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.0.0",
+    "cheerio": "~0.17.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "~0.7.4",
+    "express": "~4.2.0",
+    "iconv-lite": "~0.4.11",
+    "mongoose": "~3.8.14",
+    "morgan": "~1.0.0",
+    "request": "~2.37.0",
+    "static-favicon": "~1.0.0",
+    "urlencode": "^1.1.0"
+  }
 }
