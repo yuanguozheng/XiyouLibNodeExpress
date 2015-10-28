@@ -524,7 +524,3 @@ __&#8226; 返回格式为JSON，形式如下：__
 
 超出范围：OUT_OF_RANGE
 
-
-更多API正在开发中！
-
-如有疑问可发邮件至：yuanguozheng@msn.cn
