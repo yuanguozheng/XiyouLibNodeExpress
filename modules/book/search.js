@@ -85,7 +85,7 @@ function doSearch(params, callback) {
         callback('Param Error');
         return;
     }
-    var images = params.images ? true : false;
+    var images = params.images == 1;
 
     var encode = 'gb2312';
     var reqUri = 'http://222.24.3.7:8080/opac_two/search2/searchout.jsp';
