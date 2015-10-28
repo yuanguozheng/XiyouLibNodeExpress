@@ -21,6 +21,7 @@ router.use('/search', function (req, res) {
     var ordersc = req.param('ordersc', 'desc');
     var orderby = req.param('orderby', 'pubdate_date');
     var images = req.param('images', 0);
+    images = images * 1;
     if (page * 1 < 1) {
         page = 1;
     }

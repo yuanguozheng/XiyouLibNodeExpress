@@ -180,9 +180,11 @@ function doSearch(params, callback) {
                         }
                     });
                 }
+                if (i == tr.length - 1) {
+                    result.BookData = bookData;
+                    callback(result);
+                }
             });
-            result.BookData = bookData;
-            callback(result);
         }
     );
 }

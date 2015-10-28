@@ -337,7 +337,9 @@ page（设置请求的页数，默认为1，超出范围报错）
 ordersc（排序顺序，默认为desc，供选：asc为顺序，desc为逆序）
 
 orderby（排序依据，默认为pubdate_date，即：出版年，供选值：pubdate_date（出版年）,title（题目）,authors（责任者/作者）,publisher（出版社）,isn（标准号））
-   
+
+images （是否返回带封面图片的数据，0为不返回，1为返回，注：某些图书无图片，则返回null）
+
 __&#8226; 返回格式为JSON，形式如下：__
    
 ``` js
