@@ -168,7 +168,7 @@ function doSearch(params, callback) {
                     Total: total,
                     Available: available
                 };
-                if (images && tr.length <= 10) {
+                if (images) {
                     var douban = require('../other/getDoubanInfo');
                     douban(id, isbn, function (info) {
                         if (info == null) {
@@ -185,11 +185,6 @@ function doSearch(params, callback) {
                     });
                 }
             });
-
-            if (!images || images > 10) {
-                result.BookData = bookData;
-                callback(result);
-            }
         }
     );
 }
