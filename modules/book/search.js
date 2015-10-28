@@ -178,9 +178,12 @@ function doSearch(params, callback) {
                         } else {
                             bookData[i].Images = null;
                         }
+                        if (i == tr.length - 1) {
+                            result.BookData = bookData;
+                            callback(result);
+                        }
                     });
-                }
-                if (i == tr.length - 1) {
+                } else if (i == tr.length - 1) {
                     result.BookData = bookData;
                     callback(result);
                 }
