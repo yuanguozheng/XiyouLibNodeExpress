@@ -186,7 +186,7 @@ function doSearch(params, callback) {
                 }
             });
 
-            if (!images) {
+            if (!images || images > 10) {
                 result.BookData = bookData;
                 callback(result);
             }
