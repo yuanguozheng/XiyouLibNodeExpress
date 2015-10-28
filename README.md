@@ -368,7 +368,12 @@ __&#8226; 返回格式为JSON，形式如下：__
                 "Year":2014,   //出版年
                 "Sort":"TP312C/1431",  //图书馆索书号
                 "Total":4,   //图书馆藏书数量
-                "Avaliable":2   //可借阅数量
+                "Avaliable":2,   //可借阅数量
+                "Images": {  // 封面图片（可能为null）
+                    "small":"https://img3.doubanio.com/spic/s28002830.jpg",
+                    "large":"https://img3.doubanio.com/lpic/s28002830.jpg",
+                    "medium":"https://img3.doubanio.com/mpic/s28002830.jpg"
+                }
             },……
         ]
     }
