@@ -514,6 +514,8 @@ __&#8226; 返回格式为JSON，形式如下：__
 
 用户未登陆：USER_NOT_LOGIN
 
+无效的session：SESSION_INVALID
+
 记录为空：NO_RECORD
 
 远程服务器错误：REMOTE_SERVER_ERROR
@@ -523,4 +525,5 @@ __&#8226; 返回格式为JSON，形式如下：__
 续借失败：RENEW_FAILED
 
 超出范围：OUT_OF_RANGE
+
 
