@@ -11,8 +11,12 @@ var getRent = require('../modules/user/getRent');
 var userInfo = require('../modules/user/userInfo');
 var doRenew = require('../modules/user/doRenew');
 var getFavorite = require('../modules/user/getFavorite');
+var getFavoriteImg = require('../modules/user/getFavoriteImg');
+
 var addFavorite = require('../modules/user/addFavorite');
 var delFavorite = require('../modules/user/delFavorite');
+var modifyPassword = require('../modules/user/modifyPassword');
+
 
 router.use('/login', function (req, res) {
     var username = req.param('username');
@@ -67,6 +71,15 @@ router.use('/favorite', function (req, res) {
     });
 });
 
+router.use('/favoriteWithImg', function (req, res) {
+    var loginSession = [];
+    loginSession[0] = req.param('session');
+    getFavoriteImg(loginSession, function (result) {
+        parsers.resultProc(req, result, res);
+    });
+});
+
+
 router.use('/addFav', function (req, res) {
     var loginSession = [];
     loginSession[0] = req.param('session');
@@ -86,6 +99,22 @@ router.use('/delFav', function (req, res) {
         parsers.resultProc(req, result, res);
     });
 });
+ 
 
+router.use('/modifyPassword', function (req, res) {
+    var loginSession = [];
+
+    loginSession[0] = req.param('session');
+    var mustInfo = {
+        str_reader_pwd:req.param('password'),
+        str_reader_pwd_new:req.param('newpassword'),
+        str_reader_pwd_new_re: req.param('repassword'),
+        str_reader_barcode: req.param('username')
+    };
+        // console.log(req.param('username'));
+    modifyPassword(loginSession,mustInfo, function (result) {
+        parsers.resultProc(req, result, res);
+    });
+});
 
 module.exports = router;

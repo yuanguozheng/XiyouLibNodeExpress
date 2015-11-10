@@ -210,7 +210,40 @@ __&#8226; 返回格式为JSON，形式如下：__
     ]
 }
 ```
-### 7.添加图书收藏，API名：addFav
+### 7.图书收藏(带图片)，API名：favoriteWithImg
+
+__&#8226; 完整路径：__ http://{hostname}:{port}/user/favoriteWithImg
+
+__&#8226; 支持方法：__ GET、POST
+
+__&#8226; 必选参数：__ session（登陆成功后回传的Session）
+
+__&#8226; 返回格式为JSON，形式如下：__
+
+``` js
+{
+    "Result":true,  //标识请求是否成功
+    "Detail":
+    [
+        {
+            "Title":"21天学通Java",//书名
+            "Pub":"电子工业出版社",//出版社
+            "Sort":"TP312JA",//索书号
+            "Author":"庞永庆,庞丽娟,"//作者
+            "ISBN":"9787121078972",//条形码
+            "ID":"01h0019548"//图书馆内控制号
+            "Images"://图片来自豆瓣，可能为null
+            {
+                "small":"https://img2.doubanio.com/spic/s10307479.jpg",
+                "large":"https://img2.doubanio.com/lpic/s10307479.jpg",
+                "medium":"https://img2.doubanio.com/mpic/s10307479.jpg"
+            }
+        },
+        ...
+    ]
+}
+```
+### 8.添加图书收藏，API名：addFav
 
 __&#8226; 完整路径：__ http://{hostname}:{port}/user/addFav
 
@@ -229,7 +262,7 @@ __&#8226; 返回格式为字符串，说明如下:__
 * USER_NOT_LOGIN：用户未登录（session过期）
 * PARAM_ERROR：参数错误，缺少参数
 
-### 8.删除图书收藏，API名: delFav
+### 9.删除图书收藏，API名: delFav
 
 __&#8226; 完整路径：__ http://{hostname}:{port}/user/delFav
 
@@ -246,6 +279,28 @@ __&#8226; 返回格式为字符串，说明如下：__
 * DELETED_SUCCEED：删除成功
 * DELETED_FAILED：删除失败
 * USER_NOT_LOGIN：用户未登录（session过期）
+* PARAM_ERROR：参数错误，缺少参数
+
+### 10.修改密码，API名：modifyPassword
+
+__&#8226; 完整路径：__ http://{hostname}:{port}/user/modifyPassword
+
+__&#8226; 支持方法：__ POST
+
+__&#8226; 必选参数：__
+
+1.session (登陆成功后回传的Session)
+2.username (用户名eg：S04111176)
+3.password (当前密码)
+4.newpassword (新密码)
+5.repassword (确认新密码)
+
+__&#8226; 返回格式为字符串，说明如下：__
+
+* MODIFY_SUCCEED: 修改成功
+* INVALID_PASSWORD：旧密码不正确或session不正确或未登录
+* UDIFFERENT_PASSWORD：新密码两次输入不一致
+* INVALID_ERROR: 其他错误
 * PARAM_ERROR：参数错误，缺少参数
 
 ## 新闻公告
