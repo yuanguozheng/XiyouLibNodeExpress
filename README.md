@@ -148,7 +148,7 @@ __&#8226; 返回格式为JSON，形式如下：__
 		    "Barcode":"01386243",  //图书馆内部条形码
 		    "Department":"通信计算机库（长安校区）",  //所在分馆
 		    "State":"本馆续借",  //当前状态
-		    "Date":"2014-07-22",  //应还日期
+		    "Date":"20140722",  //应还日期
 		    "CanRenew":false  //是否可续借
 		    "Department_id":"05"  //书库ID号，用于续借
 		    "Library_id":"A"  //分馆ID号，用于续借
@@ -316,7 +316,7 @@ http://{hostname}:{port}/news/getList/{type}/{page}
    
 __&#8226; 必选参数：__ 
 type（“news”（新闻）、“announce”（公告）供选，其他值则报错）
-page（所查询的公告页数，超出范围自动跳至第一页，最新为1，不填报错）
+page（所查询的公告页数，超出范围返回最后一页，最新为1，不填报错）
    
 __&#8226; 返回格式为JSON，形式如下：__
    
@@ -569,6 +569,8 @@ __&#8226; 返回格式为JSON，形式如下：__
 
 用户未登陆：USER_NOT_LOGIN
 
+无效的session：SESSION_INVALID
+
 记录为空：NO_RECORD
 
 远程服务器错误：REMOTE_SERVER_ERROR
@@ -578,4 +580,5 @@ __&#8226; 返回格式为JSON，形式如下：__
 续借失败：RENEW_FAILED
 
 超出范围：OUT_OF_RANGE
+
 
