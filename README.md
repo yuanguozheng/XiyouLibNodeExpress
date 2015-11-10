@@ -289,11 +289,11 @@ __&#8226; 支持方法：__ POST
 
 __&#8226; 必选参数：__
 
-1.session (登陆成功后回传的Session)
-2.username (用户名eg：S04111176)
-3.password (当前密码)
-4.newpassword (新密码)
-5.repassword (确认新密码)
+1. session (登陆成功后回传的Session)
+2. username (用户名eg：S04111176)
+3. password (当前密码)
+4. newpassword (新密码)
+5. repassword (确认新密码)
 
 __&#8226; 返回格式为字符串，说明如下：__
 
