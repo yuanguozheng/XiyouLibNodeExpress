@@ -451,6 +451,7 @@ __&#8226; 返回格式为JSON，形式如下：__
     "Result":true,  //标识请求是否成功
     "Detail":
     {
+    	"ID":"01h0080459",//所查图书的ID
         "ISBN":"9787115341440",  //所查图书的ISBN
         "SecondTitle":"Object oriented programming of C++",  //副标题
         "Pub":"北京  :人民邮电出版社 ,2014.2",  //出版信息
