@@ -94,7 +94,12 @@ function getBookDetail(id, callback) {
 
             var $$ = cheerio.load($('td[width=670]').html());
 
-            var ISBN, SecondTitle, Pub, Summary, Tilte, Form, Author, Sort, Subject;
+            var ISBN, Pub, Tilte, Author, Sort = "";
+            var SecondTitle = "";
+            var Form = "";
+            var Subject = "";
+            var Summary = "";
+
             $$('tr').each(function (i, e) {
                 var pageBaseInfo = ($$(e).text().trim()).split(' : ');
                 if (pageBaseInfo.length == 1) {
