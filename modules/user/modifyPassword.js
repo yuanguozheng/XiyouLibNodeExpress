@@ -60,15 +60,15 @@ var cheerio = require('cheerio');
             var resu = result.match(/(\(\")(.*)\"\)/)[2];
            // console.log(resu);
            
-           if(result.indexOf('修改成功') > 0){
+           if(result.indexOf('修改成功') > -1){
              callback('MODIFY_SUCCEED');
              return;
            }
-           else if(result.indexOf('旧密码不正确')){
+           else if(result.indexOf('旧密码不正确') > -1){
                 callback('INVALID_PASSWORD');
                 return;
            }
-           else if(result.indexOf('新密码两次输入不一致')){
+           else if(result.indexOf('新密码两次输入不一致') > -1){
                 callback('DIFFERENT_PASSWORD');
                 return;
            }
