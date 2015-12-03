@@ -42,7 +42,7 @@ function getRank(type, size, callback) {
             }
             body = (iconv.decode(body, "GB2312")).replace(/td_color_2/g, 'td_color_1');
             var $ = cheerio.load(body);
-            if ($('.top_detail').next().text() == '书评排行榜暂无内容') {
+            if ($('.top_detail').next().text().indexOf('暂无内容') > -1) {
                 callback('null');
             }
             var info = [];

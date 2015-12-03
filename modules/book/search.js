@@ -155,7 +155,9 @@ function doSearch(params, callback) {
                 var sort = $(e.children[13]).text().trim();
                 var total = e.children[15].children[1].data.replace(/[^0-9]/ig, '') * 1;
                 var available = e.children[15].children[4].data.replace(/[^0-9]/ig, '') * 1;
-
+                if(author.lastIndexOf(',')==author.length-1){
+                    author = author.substring(0,author.length-1);
+                }
                 bookData[i] =
                 {
                     ID: id,
