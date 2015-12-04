@@ -57,9 +57,15 @@ module.exports = function getFavorite(session, callback) {
                         temp[i] = $(element).text().trim();
                     });
                     //console.log(temp);/*测试导出的数组*/
-                    if(temp[4].lastIndexOf(',')==temp[4].length-1){
-                        temp[4] = temp[4].substring(0,temp[4].length-1);
+                    if(temp[4]!=null){
+                        if(temp[4].lastIndexOf(',')==temp[4].length-1){
+                            temp[4] = temp[4].substring(0,temp[4].length-1);
+                        }
                     }
+                    else{
+                        temp[4] = "";
+                    }
+                    
                     info[i] = {
                         //对需要的字段进行筛选
                         Title: temp[0],

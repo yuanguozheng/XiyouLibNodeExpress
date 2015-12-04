@@ -141,9 +141,16 @@ function getBookDetail(id, callback) {
                         break;
                 }
             });
-            if(Author.lastIndexOf(',')==Author.length-1){
-                Author = Author.substring(0,Author.length-1);
+ 
+            if(Author != null ){
+                if(Author.lastIndexOf(',')==Author.length-1){
+                    Author = Author.substring(0,Author.length-1);
+                }
             }
+            else{
+                Author = "";
+            }
+                
 
             baseInfo =
             {
@@ -222,9 +229,15 @@ function getBookDetail(id, callback) {
                     title = $$(e).children()[0].children[0].data;
                 } else {
                     author = $$(e).text();
-                    if(author.lastIndexOf(',')==author.length-1){
-                        author = author.substring(0,author.length-1);
+                    if(author != null){
+                        if(author.lastIndexOf(',')==author.length-1){
+                            author = author.substring(0,author.length-1);
+                        }
                     }
+                    else{
+                        author = "";
+                    }
+                    
                     referBook.push
                     (
                         {
