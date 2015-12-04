@@ -9,7 +9,7 @@ var session;
 
 function userLogin(username, password, callback) {
     if (username == '' || password == '') {
-        callback(false);
+        callback('Account Error');
         return;
     }
     request(
@@ -31,11 +31,10 @@ function userLogin(username, password, callback) {
             if (err) {
                 callback(err);
                 return;
-            }
+            } 
             body = iconv.decode(body, "GB2312");
-            //console.log(body);
             session = res.headers['set-cookie'];
-            //console.log(session);
+            // console.log(session);
             if (body == 'ok') {
                 callback(session[0]);
                 return;
