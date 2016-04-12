@@ -65,3 +65,8 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+*.0
+local.ns
+*.bson
+*._0
+journal/lsn

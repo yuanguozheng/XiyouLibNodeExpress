@@ -40,7 +40,10 @@ function getNewsAnnounceList(type, page, callback) {
                 var t = [];
                 t = $(element).children();
                 var str = $(t[1]).text();
-                var itemID = (t[1].children[0].attribs['href'].substr(15)).trim();
+                var itemIDP = ((t[1]).children[0].children[0].attribs['href']);
+
+                var itemID = itemIDP.substr(15).trim();
+                
                 var start = str.indexOf('】') + 1;
                 var end = str.length - start;
                 var rawDate = $(t[3]).text();
