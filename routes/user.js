@@ -16,7 +16,7 @@ var getFavoriteImg = require('../modules/user/getFavoriteImg');
 var addFavorite = require('../modules/user/addFavorite');
 var delFavorite = require('../modules/user/delFavorite');
 var modifyPassword = require('../modules/user/modifyPassword');
-var getRentImg = require('../modules/user/getRentImg');
+//var getRentImg = require('../modules/user/getRentImg');
 
 router.use('/login', function (req, res) {
     var username = req.param('username');
@@ -42,13 +42,13 @@ router.use('/rent', function (req, res) {
     });
 });
 
-router.use('/rentImg', function (req, res) {
-    var loginSession = [];
-    loginSession[0] = req.param('session');
-    getRentImg(loginSession, function (result) {
-        parsers.resultProc(req, result, res);
-    });
-});
+//router.use('/rentImg', function (req, res) {
+//    var loginSession = [];
+//    loginSession[0] = req.param('session');
+//    getRentImg(loginSession, function (result) {
+//        parsers.resultProc(req, result, res);
+//    });
+//});
 
 
 router.use('/info', function (req, res) {
